@@ -1,3 +1,4 @@
+package SetUp;
 import java.util.HashMap;
 import java.util.LinkedList;
 
@@ -67,30 +68,5 @@ public class Graph {
 	}
 
 	
-	public void DFS(Node node){
-		
-		LinkedList<Node> path = new LinkedList<Node>();
-		
-		// Find S
-		for(Node n: graph.keySet()){
-			if(n.getName().equals("S") && n.visited == 0){
-				n.setvisted();
-				n.adjacentNodes.add(n);
-				path = n.adjacentNodes;
-				queue.addFirst(path);
-				break;
-			}
-		}
-		
-		for(Node child: path){
-			if(child.adjacentNodes.isEmpty()){
-				child.adjacentNodes = path;
-				child.adjacentNodes.addFirst(child);
-			}else{
-				child.adjacentNodes.addFirst(child);
-			}
-		}
-		return;			
-	}
 
 }
