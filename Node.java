@@ -1,0 +1,72 @@
+import java.util.LinkedList;
+import java.util.HashMap;
+
+public class Node{
+	String name;
+	double cost, distance;
+	int visited; // 0 = not visited, 1 = visited
+	HashMap<Node, Double> direction = new HashMap<Node, Double>();
+	LinkedList<Node> adjacentNodes = new LinkedList<Node>();;
+	LinkedList<HashMap<Node, Double>> path = new LinkedList<>();
+	Node(String name, double cost, double distance, int visited){
+		this.name = name;
+		this.cost = cost;
+		this.distance = distance;
+		this.visited = visited;
+	}
+	
+
+	public String getName(){
+		return name;
+	}
+	
+	public double getCost(){
+		return cost;
+	}
+	
+
+	public void pairNode(Node n){
+		direction.put(n, distance);
+		path.add(direction);
+		
+	}
+	
+	public LinkedList<Node> getPath(){
+		
+		LinkedList<Node> list = new LinkedList<Node>();
+		
+		for(HashMap<Node, Double> n: path){
+			for(Node node: n.keySet()){
+				if(!list.contains(node)){
+					list.add(node);
+				}
+			}
+		}
+		
+		//remember to sort it
+		
+		return list;
+	}
+	// Method to get the distance between nodes
+	public double getDistanceTo(Node node){
+		double distance = 0.0;
+		for(Node n: direction.keySet()){
+			if(n.getName().equals(node.getName())){
+				distance = direction.get(n);
+			}
+		}
+		
+		return distance;
+	}
+	
+	public void setCost(double c){
+		this.cost = c;
+	}
+	
+
+	public void setvisted(){
+		this.visited = 1;
+	}
+	
+
+}
