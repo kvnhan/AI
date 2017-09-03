@@ -14,7 +14,7 @@ public class Main {
 		FileReader fr = null;
 		Node startState = new Node("S", 0.0, 0.0, 0);
 		Graph g = new Graph();
-		DFS dfs = new DFS();
+		//DFS dfs = new DFS();
 
 		try{
 			
@@ -59,7 +59,7 @@ public class Main {
 			
 			System.out.println(g.getSize());
 			//g.DFS(startState);
-			dfs.DFS(g, startState);
+			//dfs.DFS(g, startState);
 			System.out.println("It works");
 			
 		}catch(Exception e){

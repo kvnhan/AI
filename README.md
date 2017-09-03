@@ -8,3 +8,8 @@ TODO List:
 	A*
 	Hill-climbing (use the version of hill-climbing without backtracking)
 	Beam search (use w = 2)
+	
+	
+TESTING:
+
+Terminal: java -jar test.jar graph.txt

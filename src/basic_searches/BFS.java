@@ -1,12 +1,9 @@
 /**
- * 
+ * Breath-First-Search Algorithm
+ * @author jmetzger kvnhan
  */
 package basic_searches;
 
-/**
- * @author jmetzger
- *
- */
 public class BFS {
 
 }
