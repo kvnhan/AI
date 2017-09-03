@@ -32,15 +32,21 @@ public class Node{
 		
 	}
 	
+	public LinkedList<Node> getAdjacentNodes(){
+		return adjacentNodes;
+	}
+	
+	public void setAdjacentNodes(LinkedList<Node> newNodes){
+		adjacentNodes = newNodes;
+	}
 	public LinkedList<Node> getPathOf(){
-		//
+		
 		LinkedList<Node> list = new LinkedList<Node>();
 		
 		for(HashMap<Node, Double> n: path){
 			for(Node node: n.keySet()){
-				if(!list.contains(node)){
-					list.add(node);
-				}
+				list.add(node);
+				
 			}
 		}
 		
