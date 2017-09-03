@@ -5,7 +5,6 @@ import java.util.LinkedList;
 public class Graph {
 	HashMap<Node, Node> graph = new HashMap<Node, Node>();
 	
-	LinkedList<LinkedList<Node>> queue = new LinkedList<LinkedList<Node>>();
 	
 	Graph(){
 	}
@@ -66,6 +65,24 @@ public class Graph {
 	public int getSize(){
 		return graph.size();
 	}
+
+	
+	public LinkedList<Node> findS(){
+		LinkedList<Node> path = new LinkedList<Node>();
+		
+		// Find S
+		for(Node n: graph.keySet()){
+			if(n.getName().equals("S") && n.visited == 0){
+				n.setvisted();
+				n.adjacentNodes.add(n);
+				path = n.adjacentNodes;
+				break;
+			}
+		}
+		
+		return path;
+	}
+
 
 	
 

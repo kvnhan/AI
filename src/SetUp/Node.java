@@ -5,9 +5,9 @@ import java.util.HashMap;
 public class Node{
 	String name;
 	double cost, distance;
-	int visited; // 0 = not visited, 1 = visited
+	public int visited; // 0 = not visited, 1 = visited
 	HashMap<Node, Double> direction = new HashMap<Node, Double>();
-	LinkedList<Node> adjacentNodes = new LinkedList<Node>();;
+	public LinkedList<Node> adjacentNodes = new LinkedList<Node>();;
 	LinkedList<HashMap<Node, Double>> path = new LinkedList<>();
 	Node(String name, double cost, double distance, int visited){
 		this.name = name;
