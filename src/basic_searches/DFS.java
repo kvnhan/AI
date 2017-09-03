@@ -8,19 +8,20 @@ import java.util.LinkedList;
 import SetUp.Graph;
 import SetUp.Node;
 /**
- * @author jmetzger kien
+ * @author jmetzger kvnhan
  *
  */
 public class DFS {
 	
 	LinkedList<LinkedList<Node>> queue = new LinkedList<LinkedList<Node>>();
 
-	DFS(){
+	public DFS(){
 	
 	}
 	
 public void DFS(Graph graph, Node node){
 		
+		LinkedList<Node> startQueue = new LinkedList<Node>();
 		LinkedList<Node> path = new LinkedList<Node>();
 		Node startState;
 		startState = graph.getS();
@@ -35,6 +36,8 @@ public void DFS(Graph graph, Node node){
 				child.adjacentNodes.addFirst(child);
 			}
 		}
+		
+		System.out.println("Hello");
 		return;			
 	}
 

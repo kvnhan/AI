@@ -3,6 +3,8 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 
+import basic_searches.DFS;
+
 
 public class Main {
 
@@ -12,6 +14,7 @@ public class Main {
 		FileReader fr = null;
 		Node startState = new Node("S", 0.0, 0.0, 0);
 		Graph g = new Graph();
+		DFS dfs = new DFS();
 
 		try{
 			
@@ -56,6 +59,7 @@ public class Main {
 			
 			System.out.println(g.getSize());
 			//g.DFS(startState);
+			dfs.DFS(g, startState);
 			System.out.println("It works");
 			
 		}catch(Exception e){
