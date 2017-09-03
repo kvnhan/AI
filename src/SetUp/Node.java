@@ -33,7 +33,7 @@ public class Node{
 	}
 	
 	public LinkedList<Node> getPathOf(){
-		
+		//
 		LinkedList<Node> list = new LinkedList<Node>();
 		
 		for(HashMap<Node, Double> n: path){
