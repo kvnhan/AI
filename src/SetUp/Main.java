@@ -55,7 +55,7 @@ public class Main {
 			}
 			
 			System.out.println(g.getSize());
-			g.DFS(startState);
+			//g.DFS(startState);
 			System.out.println("It works");
 			
 		}catch(Exception e){
