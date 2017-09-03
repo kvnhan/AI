@@ -32,7 +32,7 @@ public class Node{
 		
 	}
 	
-	public LinkedList<Node> getPath(){
+	public LinkedList<Node> getPathOf(){
 		
 		LinkedList<Node> list = new LinkedList<Node>();
 		

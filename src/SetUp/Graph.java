@@ -67,20 +67,17 @@ public class Graph {
 	}
 
 	
-	public LinkedList<Node> findS(){
-		LinkedList<Node> path = new LinkedList<Node>();
-		
+	public Node getS(){		
 		// Find S
+		Node dummyNode = new Node("Not", 0.0, 0.0, 0);
 		for(Node n: graph.keySet()){
 			if(n.getName().equals("S") && n.visited == 0){
 				n.setvisted();
-				n.adjacentNodes.add(n);
-				path = n.adjacentNodes;
-				break;
+				return n;
 			}
 		}
 		
-		return path;
+		return dummyNode;
 	}
 
 
