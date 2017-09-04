@@ -46,13 +46,10 @@ public class Main {
 					}else{
 						Node oldnode = new Node(token[0], 0.0, 0.0, 0);
 						if(g.NodeExist(oldnode)){
-							g.changeNodeCost(oldnode, Double.parseDouble(token[1]));
-							
+							g.changeNodeCost(oldnode, Double.parseDouble(token[1]));	
 						}
 					}
-
 				}
-		
 			}
 			
 			System.out.println(g.getSize());

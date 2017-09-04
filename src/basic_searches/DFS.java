@@ -31,6 +31,8 @@ public boolean dfs(Graph graph, Node node){
 		LinkedList<Node> path = new LinkedList<Node>();
 		Node startState;
 		startState = graph.getS();
+		
+
 		// Find S Node
 		if(visited.isEmpty()){
 			path = graph.getChildrenOf(startState);
@@ -42,22 +44,27 @@ public boolean dfs(Graph graph, Node node){
 			path = graph.getChildrenOf(node);
 			path = sortPath(path, node);
 		}else{
-			
+		// 
+		
 			path = graph.getChildrenOf(node);
 			path = removedVisitedPath(path);
-			path = sortPath(path, node);
-			//printQueue(path);
-			
-			
+			// Dead End
+			if(path.size() == 0){
+				System.out.println("Dead End " + node.getName());
+				graph.setVisited(node);
+				node = visitedNode.getFirst();
+				
+			}else{
+				path = graph.getChildrenOf(node);
+				path = removedVisitedPath(path);
+				path = sortPath(path, node);
+				visitedNode.addFirst(node);
+				visited.addFirst(node.getName());
+				graph.setVisited(node);
+				//printQueue(path);	
+			}
 		}
 		
-		// Dead End
-		if(path.size() == 0){
-			System.out.println("Dead End " + node.getName());
-			graph.setVisited(node);
-			node = visitedNode.getFirst();
-			
-		}
 		
 		// Get A list of Adjacent Node
 		for(Node child: path){
@@ -68,6 +75,7 @@ public boolean dfs(Graph graph, Node node){
 			}
 		}
 		
+
 		// Traversing the graph to Find G Node
 		for(Node c: path){
 			if(c.visited == 0 && found == 0){
@@ -75,18 +83,16 @@ public boolean dfs(Graph graph, Node node){
 					System.out.println("Expand " + c.getName() + "\n");
 					c.setvisted();
 					//System.out.println(c.getName() + " " + c.visited);
-					visitedNode.addFirst(c);
-					visited.addFirst(c.getName());
+					found = 0 ;
 					dfs(graph, c);
 				}else{
 					System.out.println("Found " + c.getName());
 					System.out.println("goal reached!\n");
 					found = 1;
-					return true;
 				}
 			}
+			
 		}
-		
 		return false;
 	}
 
