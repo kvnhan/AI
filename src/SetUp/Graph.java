@@ -12,16 +12,19 @@ public class Graph {
 	// Method to great a graph, sort of
 	void createGraph(Node node1, Node node2){
 		graph.put(node1, node2);
-		graph.put(node2, node1);
+		
 		
 	}
 	
-	// A method to get a list of children
+	// A method to get a list of paths
 	public LinkedList<Node> getChildrenOf(Node node){
 		LinkedList<Node> list = new LinkedList<Node>();
 		for(Node n: graph.keySet()){
 			if(node.getName().equals(n.getName())){
 				list.addFirst(graph.get(n));
+				
+			}else if(graph.get(n).getName().equals(node.getName())){
+				list.addFirst(n);
 			}
 				
 		}
@@ -80,6 +83,14 @@ public class Graph {
 		return dummyNode;
 	}
 
+	
+	public void setVisited(Node n){
+		for(Node node: graph.keySet()){
+			if(node.getName().equals(n.getName())){
+				node.setvisted();
+			}
+		}
+	}
 
 	
 

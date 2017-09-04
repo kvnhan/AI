@@ -37,7 +37,11 @@ public class Node{
 	}
 	
 	public void setAdjacentNodes(LinkedList<Node> newNodes){
-		adjacentNodes = newNodes;
+		for(Node node: newNodes){
+			if(!this.getName().equals(node.getName())){
+				this.adjacentNodes.addLast(node);
+			}
+		}
 	}
 	public LinkedList<Node> getPathOf(){
 		
