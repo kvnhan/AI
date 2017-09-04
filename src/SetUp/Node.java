@@ -2,7 +2,7 @@ package SetUp;
 import java.util.LinkedList;
 import java.util.HashMap;
 
-public class Node{
+public class Node implements Comparable<Node>{
 	String name;
 	double cost, distance;
 	public int visited; // 0 = not visited, 1 = visited
@@ -77,6 +77,20 @@ public class Node{
 
 	public void setvisted(){
 		this.visited = 1;
+	}
+
+
+	@Override
+	public int compareTo(Node arg0) {
+		double cost = arg0.getCost();
+		if(this.getCost() > cost){
+			return 1;
+		}else if(this.getCost() == cost){
+			return 0;
+		}else{
+			return -1;
+		}
+	
 	}
 	
 

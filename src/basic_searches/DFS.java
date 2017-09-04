@@ -3,6 +3,7 @@
  */
 package basic_searches;
 
+
 import java.util.LinkedList;
 
 import SetUp.Graph;
@@ -14,13 +15,14 @@ import SetUp.Node;
 public class DFS {
 	
 	LinkedList<LinkedList<Node>> queue = new LinkedList<LinkedList<Node>>();
-	LinkedList<Node> visited = new LinkedList<Node>();
+	LinkedList<String> visited = new LinkedList<String>();
+	LinkedList<Node> visitedNode = new LinkedList<Node>();
 
 	public DFS(){
 	
 	}
 	
-public void dfs(Graph graph, Node node){
+public boolean dfs(Graph graph, Node node){
 		
 		LinkedList<Node> startQueue = new LinkedList<Node>();
 		LinkedList<Node> path = new LinkedList<Node>();
@@ -32,15 +34,17 @@ public void dfs(Graph graph, Node node){
 			path = graph.getChildrenOf(startState);
 			startQueue.add(startState);
 			queue.add(startQueue);
-			visited.add(startState);
-			System.out.println("Expand " + visited.getFirst().getName());
+			visited.add(startState.getName());
+			visitedNode.add(startState);
+			System.out.println("Expand " + visited.getFirst());
 			path = graph.getChildrenOf(node);
 			path = sortPath(path, node);
 		}else{
 			
 			path = graph.getChildrenOf(node);
-			path = removedVisitedPath(visited, path);
-			sortPath(path, node);
+			path = removedVisitedPath(path);
+			//path = sortPath(path, node);
+			printQueue(path);
 			
 			
 		}
@@ -49,14 +53,14 @@ public void dfs(Graph graph, Node node){
 		if(path.size() == 0){
 			System.out.println("Dead End " + node.getName());
 			graph.setVisited(node);
-			node = visited.getFirst();
+			node = visitedNode.getFirst();
 			
 		}
 		
 		// Get A list of Adjacent Node
 		for(Node child: path){
 			if(child.getAdjacentNodes().size() == 0){
-				child.setAdjacentNodes(visited);
+				child.setAdjacentNodes(visitedNode);
 				child.getAdjacentNodes().addFirst(child);
 				printQueue(child.getAdjacentNodes());
 			}
@@ -68,15 +72,19 @@ public void dfs(Graph graph, Node node){
 				if(!c.getName().equals("G")){
 					System.out.println("Expand " + c.getName());
 					c.setvisted();
-					visited.addFirst(c);
+					System.out.println(c.getName() + " " + c.visited);
+					visitedNode.addFirst(c);
+					visited.addFirst(c.getName());
 					dfs(graph, c);
 				}else{
 					
 					System.out.println("Found " + c.getName());
-					return;
+					return true;
 				}
 			}
-		}		
+		}
+		
+		return false;
 	}
 
 	public void printQueue(LinkedList<Node> list){
@@ -86,23 +94,16 @@ public void dfs(Graph graph, Node node){
 		System.out.println();
 	}
 	
-	public LinkedList<Node> removedVisitedPath(LinkedList<Node> v, LinkedList<Node> p){
-		System.out.println(v.size());
-		System.out.println(p.size());
-		LinkedList<Node> newlist = new LinkedList<Node>();
-		for(Node node: v){
-			for(Node no: p){
-				if(!no.getName().equals(node.getName())){
-					if(no.visited == 0){
-						newlist.addFirst(no);
-					}
-				}
+	public LinkedList<Node> removedVisitedPath(LinkedList<Node> p){
+		LinkedList<Node> l = new LinkedList<Node>();
+		for(Node n: p){
+			System.out.println(n.getName() + " " + n.visited);
+			if(n.visited == 0 && !visited.contains(n.getName())){
+				System.out.println(n.getName() + " " + n.visited);
+				l.addFirst(n);
 			}
 		}
-		System.out.println("After");
-		System.out.println(newlist.size());
-		printQueue(newlist);
-		return newlist;
+		return l;
 	}
 
 	public LinkedList<Node> sortPath(LinkedList<Node> list, Node n){
@@ -118,13 +119,8 @@ public void dfs(Graph graph, Node node){
 			}
 		}
 		
-		return newPath;
-		
+		return newPath;	
 	}
 	
-	public void removeDups(LinkedList<Node> list){
-		LinkedList<Node> nl = new LinkedList<Node>();
-		Node currentNode = list.getFirst();
-		
-	}
+
 }
