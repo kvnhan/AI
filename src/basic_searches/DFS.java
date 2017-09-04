@@ -18,6 +18,8 @@ public class DFS {
 	LinkedList<String> visited = new LinkedList<String>();
 	LinkedList<String> dups = new LinkedList<String>();
 	LinkedList<Node> visitedNode = new LinkedList<Node>();
+	int found = 0;
+
 
 	public DFS(){
 	
@@ -29,7 +31,6 @@ public boolean dfs(Graph graph, Node node){
 		LinkedList<Node> path = new LinkedList<Node>();
 		Node startState;
 		startState = graph.getS();
-		
 		// Find S Node
 		if(visited.isEmpty()){
 			path = graph.getChildrenOf(startState);
@@ -37,7 +38,7 @@ public boolean dfs(Graph graph, Node node){
 			queue.add(startQueue);
 			visited.add(startState.getName());
 			visitedNode.add(startState);
-			System.out.println("Expand " + visited.getFirst());
+			System.out.println("Expand " + visited.getFirst() + "\n");
 			path = graph.getChildrenOf(node);
 			path = sortPath(path, node);
 		}else{
@@ -45,7 +46,7 @@ public boolean dfs(Graph graph, Node node){
 			path = graph.getChildrenOf(node);
 			path = removedVisitedPath(path);
 			path = sortPath(path, node);
-			printQueue(path);
+			//printQueue(path);
 			
 			
 		}
@@ -69,17 +70,18 @@ public boolean dfs(Graph graph, Node node){
 		
 		// Traversing the graph to Find G Node
 		for(Node c: path){
-			if(c.visited == 0){
+			if(c.visited == 0 && found == 0){
 				if(!c.getName().equals("G")){
-					System.out.println("Expand " + c.getName());
+					System.out.println("Expand " + c.getName() + "\n");
 					c.setvisted();
-					System.out.println(c.getName() + " " + c.visited);
+					//System.out.println(c.getName() + " " + c.visited);
 					visitedNode.addFirst(c);
 					visited.addFirst(c.getName());
 					dfs(graph, c);
 				}else{
-					
 					System.out.println("Found " + c.getName());
+					System.out.println("goal reached!\n");
+					found = 1;
 					return true;
 				}
 			}
@@ -98,9 +100,9 @@ public boolean dfs(Graph graph, Node node){
 	public LinkedList<Node> removedVisitedPath(LinkedList<Node> p){
 		LinkedList<Node> l = new LinkedList<Node>();
 		for(Node n: p){
-			System.out.println(n.getName() + " " + n.visited);
+			//System.out.println(n.getName() + " " + n.visited);
 			if(n.visited == 0 && !visited.contains(n.getName())){
-				System.out.println(n.getName() + " " + n.visited);
+				//System.out.println(n.getName() + " " + n.visited);
 				l.addFirst(n);
 			}
 			
