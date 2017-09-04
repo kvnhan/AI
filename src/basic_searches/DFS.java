@@ -16,6 +16,7 @@ public class DFS {
 	
 	LinkedList<LinkedList<Node>> queue = new LinkedList<LinkedList<Node>>();
 	LinkedList<String> visited = new LinkedList<String>();
+	LinkedList<String> dups = new LinkedList<String>();
 	LinkedList<Node> visitedNode = new LinkedList<Node>();
 
 	public DFS(){
@@ -43,7 +44,7 @@ public boolean dfs(Graph graph, Node node){
 			
 			path = graph.getChildrenOf(node);
 			path = removedVisitedPath(path);
-			//path = sortPath(path, node);
+			path = sortPath(path, node);
 			printQueue(path);
 			
 			
@@ -102,6 +103,8 @@ public boolean dfs(Graph graph, Node node){
 				System.out.println(n.getName() + " " + n.visited);
 				l.addFirst(n);
 			}
+			
+			
 		}
 		return l;
 	}
@@ -110,12 +113,13 @@ public boolean dfs(Graph graph, Node node){
 		double temp = 0.0;
 		LinkedList<Node> newPath = new LinkedList<Node>();
 		for(int i = 0; i < list.size(); i++){
-			if(list.get(i).getDistanceTo(n) > temp){
+			if(list.get(i).getDistanceTo(n) > temp && !dups.contains(list.get(i).getName())){
 				newPath.addLast(list.get(i));
 				temp = list.get(i).getDistanceTo(n);
 				
 			}else{
 				newPath.addFirst(list.get(i));
+				dups.addFirst(list.get(i).getName());
 			}
 		}
 		
