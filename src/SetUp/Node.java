@@ -9,13 +9,13 @@ public class Node implements Comparable<Node>{
 	HashMap<Node, Double> direction = new HashMap<Node, Double>();
 	public LinkedList<Node> adjacentNodes = new LinkedList<Node>();;
 	LinkedList<HashMap<Node, Double>> path = new LinkedList<>();
-	Node(String name, double cost, double distance, int visited){
+	public Node(String name, double cost, double distance, int visited){
 		this.name = name;
 		this.cost = cost;
 		this.distance = distance;
 		this.visited = visited;
 	}
-	
+
 
 	public String getName(){
 		return name;
