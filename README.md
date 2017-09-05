@@ -1,7 +1,17 @@
-Project_1 CS4341 9/12/17
+Project 1 
+
+CS4341 
+
+September 12th 2017
 
 Jonathan Metzger & Kien Nhan
 
+
+===================
+
+TESTING:
+
+Terminal: java -jar test.jar graph.txt
 
 ===================
 
@@ -27,6 +37,4 @@ TODO List:
 	
 ===================
 	
-TESTING:
 
-Terminal: java -jar test.jar graph.txt
