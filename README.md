@@ -1,5 +1,12 @@
+Version 1.1
+-Breadth 1st Search
+
+Version 1.0
+- Depth 1st Search
+- Birth of Program
+
 TODO List:
-	Depth 1st search
+X	Depth 1st search
 	Breadth 1st search
 	Depth-limited search (use depth-limit = 2)
 	Iterative deepening search (show all iterations, not just the iteration that succeeds)
