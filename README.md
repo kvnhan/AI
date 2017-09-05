@@ -1,7 +1,6 @@
-Project 1
-9/12/17
-Jonathan Metzger
-Kien Nhan
+Project_1 CS4341 9/12/17
+
+Jonathan Metzger & Kien Nhan
 
 
 ===================
