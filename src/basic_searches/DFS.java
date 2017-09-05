@@ -10,23 +10,22 @@ import SetUp.Graph;
 import SetUp.Node;
 /**
  * @author jmetzger kvnhan
- *
+ * CORRECT AS IS WHEN BFS IS COMMENTED OUT
  */
 public class DFS {
 	
-	LinkedList<LinkedList<Node>> queue = new LinkedList<LinkedList<Node>>();
-	LinkedList<String> visited = new LinkedList<String>();
-	LinkedList<String> DeadEnd = new LinkedList<String>();
-	LinkedList<String> dups = new LinkedList<String>();
-	LinkedList<Node> visitedNode = new LinkedList<Node>();
-	int found = 0;
-
+	private LinkedList<LinkedList<Node>> queue = new LinkedList<LinkedList<Node>>();
+	private LinkedList<String> visited = new LinkedList<String>();
+	private LinkedList<String> DeadEnd = new LinkedList<String>();
+	private LinkedList<String> dups = new LinkedList<String>();
+	private LinkedList<Node> visitedNode = new LinkedList<Node>();
+	private int found = 0;
 
 	public DFS(){
 	
 	}
 	
-public boolean dfs(Graph graph, Node node){
+	public boolean dfs(Graph graph, Node node){
 		
 		LinkedList<Node> startQueue = new LinkedList<Node>();
 		LinkedList<LinkedList<Node>> dummyqueue = new LinkedList<LinkedList<Node>>();
@@ -42,8 +41,9 @@ public boolean dfs(Graph graph, Node node){
 			queue.add(startQueue);
 			visited.add(startState.getName());
 			visitedNode.add(startState);
-			System.out.println("Expand " + visited.getFirst() + "\n");
+			System.out.println("Expand " + visited.getFirst());
 			printQueue2(queue);
+			System.out.println("\n");
 			queue = new LinkedList<LinkedList<Node>>();
 			path = graph.getChildrenOf(node);
 			path = sortPath(path, node);
@@ -92,17 +92,19 @@ public boolean dfs(Graph graph, Node node){
 		for(Node c: path){
 			if(c.visited == 0 && found == 0){
 				if(!c.getName().equals("G")){
-					System.out.println("Expand " + c.getName() + "\n");
+					System.out.println("Expand " + c.getName());
 					queue = fixQueue(visitedNode.getFirst(), dummyqueue);
 					c.setvisted();
 					printQueue2(queue);
+					System.out.println("\n");
 					found = 0 ;
 					dfs(graph, c);
 				}else{
-					System.out.println("Expand " + c.getName() + "\n");
+					System.out.println("Expand " + c.getName());
 					queue = fixQueue(visitedNode.getFirst(), dummyqueue);
 					c.setvisted();
 					printQueue2(queue);
+					System.out.println("\n");
 					System.out.println("goal reached!\n");
 					found = 1;
 				}
