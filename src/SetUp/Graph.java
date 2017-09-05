@@ -72,10 +72,13 @@ public class Graph {
 	
 	public Node getS(){		
 		// Find S
+		LinkedList<Node> start = new LinkedList<Node>();
 		Node dummyNode = new Node("Not", 0.0, 0.0, 0);
 		for(Node n: graph.keySet()){
 			if(n.getName().equals("S") && n.visited == 0){
 				n.setvisted();
+				start.add(n);
+				n.setAdjacentNodes(start);
 				return n;
 			}
 		}
@@ -85,9 +88,11 @@ public class Graph {
 
 	
 	public void setVisited(Node n){
+		
 		for(Node node: graph.keySet()){
 			if(node.getName().equals(n.getName())){
 				node.setvisted();
+				
 			}
 		}
 	}
