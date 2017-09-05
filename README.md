@@ -1,9 +1,18 @@
+Project 1 - 9/12/17
+Jonathan Metzger
+Kien Nhan
+
+
+===================
+
 Version 1.1
--Breadth 1st Search
+- Breadth 1st Search
 
 Version 1.0
 - Depth 1st Search
 - Birth of Program
+
+===================
 
 TODO List:
 X	Depth 1st search
@@ -16,6 +25,7 @@ X	Depth 1st search
 	Hill-climbing (use the version of hill-climbing without backtracking)
 	Beam search (use w = 2)
 	
+===================
 	
 TESTING:
 
