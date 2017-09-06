@@ -104,7 +104,7 @@ public class DFS {
 					c.setvisted();
 					printQueue2(queue);
 					//System.out.println("\n");
-					System.out.println("Goal Reached!\n");
+					System.out.println("\nGoal Reached!\n");
 					found = 1;
 				}
 			}

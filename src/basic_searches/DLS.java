@@ -22,7 +22,9 @@ public class DLS {
 	private LinkedList<Node> visitedNode = new LinkedList<Node>();
 	private int found = 0;
 	private int limit = 2;
-
+	private int depth = 0;
+	private int totPath = 0;
+	
 	public DLS(){
 	
 	}
@@ -100,6 +102,11 @@ public class DLS {
 					printQueue2(queue);
 					System.out.println("\n");
 					found = 0 ;
+					
+					if (depth == limit)
+					{
+						return false;
+					}
 					dls(graph, c);
 				}else{
 					System.out.println("Expand " + c.getName());
@@ -113,6 +120,7 @@ public class DLS {
 			}
 			
 		}
+	
 		return false;
 	}
 
@@ -172,7 +180,7 @@ public class DLS {
 			if(list.get(i).getDistanceTo(n) > temp && !dups.contains(list.get(i).getName())){
 				newPath.addLast(list.get(i));
 				temp = list.get(i).getDistanceTo(n);
-				
+				depth++;
 			}else{
 				newPath.addFirst(list.get(i));
 				dups.addFirst(list.get(i).getName());
