@@ -58,30 +58,66 @@ public class Main {
 			Scanner in = new Scanner ( System.in );
 			System.out.println("\n===== Project 1 =====");
 			System.out.println("\nPlease Select the Search Algorithm below you wish to execute:");
-			System.out.println ( "\n1) Depth 1st Search\n2) Breadth 1st Search\n3) Depth-Limited Search\n" );
+			System.out.println ( "\n1) Depth 1st Search\n2) Breadth 1st Search\n3) Depth-Limited Search\n4) Iterative Deepening Search\n5) Uniform Cost Search (Branch-and-bound)\n6) Greedy Search\n7) A*\n8) Hill-Climbing Search\n9) Beam Search\n" );
 		    System.out.print ( "Selection: " );
 		    switch ( in.nextInt() ) {
 		      case 1:
-		        System.out.println ( "You picked Depth 1st Search" );
+		        System.out.println ( "\nSearch Method: Depth 1st Search" );
 		        System.out.println("\n===== Queue =====\n");
 		        DFS dfs = new DFS();
 		        dfs.dfs(g, startState);
 		        break;
 		      case 2:
-		        System.out.println ( "You picked Breadth 1st Search" );
+		        System.out.println ( "\nSearch Method: Breadth 1st Search" );
 		        System.out.println("\n===== Queue =====\n");
 		        BFS bfs = new BFS();
 		        bfs.bfs(g, startState);
 		        break;
 		      case 3:
-			    System.out.println ( "You picked Depth-Limited Search" );
+			    System.out.println ( "\nSearch Method: Depth-Limited Search" );
 			    System.out.println("\n===== Queue =====\n");
 			    DLS dls = new DLS();
 			    dls.dls(g, startState, startState);
 			    break;
+		      case 4:
+				System.out.println ( "\nSearch Method: Iterative Deepening Search" );
+			    System.out.println("\n===== Queue =====\n");
+			    //IDS ids = new IDS();
+			    //ids.ids(g, startState, startState);
+			    break;
+		      case 5:
+				System.out.println ( "\nSearch Method: Uniform Cost Search (Branch-and-bound)" );
+			    System.out.println("\n===== Queue =====\n");
+			    //UCS ucs = new UCS();
+			    //ucs.ucs(g, startState, startState);
+			    break;
+		      case 6:
+				System.out.println ( "\nSearch Method: Greedy Search" );
+			    System.out.println("\n===== Queue =====\n");
+			    //GS gs = new GS();
+			    //gs.gs(g, startState, startState);
+			    break;
+		      case 7:
+				System.out.println ( "\nSearch Method: A*" );
+			    System.out.println("\n===== Queue =====\n");
+			    //AS as = new AS();
+			    //as.as(g, startState, startState);
+			    break;
+		      case 8:
+				System.out.println ( "\nSearch Method: Hill-Climbing Search" );
+			    System.out.println("\n===== Queue =====\n");
+			    //hcs hcs = new HCS();
+			    //hcs.hcs(g, startState, startState);
+			    break;
+		      case 9:
+				System.out.println ( "\nSearch Method: Beam Search" );
+			    System.out.println("\n===== Queue =====\n");
+			    //bs bs = new BS();
+			    //bs.bs(g, startState, startState);
+			    break;
 		      default:
-		        System.err.println ( "Unrecognized option" );
-		        break;
+		        System.err.println ( "Wrong Input" );
+		        return;
 		    }
 			System.out.println("It works");
 			System.out.println("\n===== EOF =====\n\n");
