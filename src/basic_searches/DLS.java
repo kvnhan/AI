@@ -21,15 +21,15 @@ public class DLS {
 	private LinkedList<String> dups = new LinkedList<String>();
 	private LinkedList<Node> visitedNode = new LinkedList<Node>();
 	private int found = 0;
-	private int limit = 2;
-	private int depth = 0;
+	private int max = 2;
+	private int depth_limit = 0;
 	private int totPath = 0;
 	
 	public DLS(){
 	
 	}
 	
-	public boolean dls(Graph graph, Node node){
+	public boolean dls(Graph graph, Node node, Node from){
 		
 		LinkedList<Node> startQueue = new LinkedList<Node>();
 		LinkedList<LinkedList<Node>> dummyqueue = new LinkedList<LinkedList<Node>>();
@@ -102,12 +102,17 @@ public class DLS {
 					printQueue2(queue);
 					System.out.println("\n");
 					found = 0 ;
-					
-					if (depth == limit)
+					depth_limit = c.getAdjacentNodes().size();
+					if (depth_limit == max)
 					{
-						return false;
+						queue = pop();
+						Node newnode = queue.getFirst().get(0);
+						Node fromNode = queue.getFirst().get(1);
+						dls(graph, newnode, fromNode);
+					} else {
+						dls(graph, c, c);
 					}
-					dls(graph, c);
+					
 				}else{
 					System.out.println("Expand " + c.getName());
 					queue = fixQueue(visitedNode.getFirst(), dummyqueue);
@@ -180,7 +185,6 @@ public class DLS {
 			if(list.get(i).getDistanceTo(n) > temp && !dups.contains(list.get(i).getName())){
 				newPath.addLast(list.get(i));
 				temp = list.get(i).getDistanceTo(n);
-				depth++;
 			}else{
 				newPath.addFirst(list.get(i));
 				dups.addFirst(list.get(i).getName());

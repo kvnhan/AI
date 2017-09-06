@@ -77,7 +77,7 @@ public class Main {
 			    System.out.println ( "You picked Depth-Limited Search" );
 			    System.out.println("\n===== Queue =====\n");
 			    DLS dls = new DLS();
-			    dls.dls(g, startState);
+			    dls.dls(g, startState, startState);
 			    break;
 		      default:
 		        System.err.println ( "Unrecognized option" );
