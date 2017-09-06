@@ -14,6 +14,9 @@ TESTING:
 Terminal: java -jar test.jar graph.txt
 
 ===================
+Version 1.2
+- General Search function
+- Depth-Limited Search
 
 Version 1.1
 - Breadth 1st Search
@@ -26,7 +29,7 @@ Version 1.0
 
 TODO List:
 - DONE Depth 1st search
-- Breadth 1st search
+- DONE Breadth 1st search
 - Depth-limited search (use depth-limit = 2)
 - Iterative deepening search (show all iterations, not just the iteration that succeeds)
 - Uniform cost search (= Branch-and-bound)
