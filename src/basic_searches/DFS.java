@@ -52,7 +52,7 @@ public class DFS {
 			
 			// Dead End
 			if(path.size() == 0){
-				System.out.println("** Dead End " + node.getName() + "**\n");
+				//System.out.println("** Dead End " + node.getName() + "**\n");
 				graph.setVisited(node);
 				DeadEnd.add(node.getName());
 				queue = pop();
