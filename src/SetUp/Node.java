@@ -32,6 +32,10 @@ public class Node implements Comparable<Node>{
 		
 	}
 	
+	public void reset(){
+		adjacentNodes = new LinkedList<Node>();
+	}
+	
 	public LinkedList<Node> getAdjacentNodes(){
 		return adjacentNodes;
 	}

@@ -71,7 +71,7 @@ public class Main {
 		        System.out.println ( "\nSearch Method: Breadth 1st Search" );
 		        System.out.println("\n===== Queue =====\n");
 		        BFS bfs = new BFS();
-		        bfs.bfs(g, startState);
+		        bfs.bfs(g, startState, startState);
 		        break;
 		      case 3:
 			    System.out.println ( "\nSearch Method: Depth-Limited Search" );
@@ -119,7 +119,7 @@ public class Main {
 		        System.err.println ( "Wrong Input" );
 		        return;
 		    }
-			System.out.println("It works");
+
 			System.out.println("\n===== EOF =====\n\n");
 			
 		}catch(Exception e){
