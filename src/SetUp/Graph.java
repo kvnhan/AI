@@ -1,6 +1,9 @@
 package SetUp;
+import java.util.AbstractQueue;
 import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.PriorityQueue;
+import java.util.Queue;
 
 public class Graph {
 	HashMap<Node, Node> graph = new HashMap<Node, Node>();
@@ -95,6 +98,41 @@ public class Graph {
 				
 			}
 		}
+	}
+	
+	public Node General_Search(){
+		Queue<Node> q = new LinkedList<Node>();
+		Node goal_node = new Node("G", 0.0, 0.0, 0);
+		Node start_node = new Node("S", 0.0, 0.0, 0);
+		q.add(start_node);
+		while(true){
+			if (q.isEmpty()){
+				return null;
+			}
+			Node curr_node = q.remove();
+			if (curr_node.name == goal_node.name){
+				return curr_node;
+			}
+			LinkedList<Node> new_nodes = getChildrenOf(curr_node);
+			Queue<Node> new_q = AddToQueue(q, new_nodes, "BFS");
+			q = new_q;
+		}
+	}
+	
+	public Queue<Node> AddToQueue(Queue<Node> q, Queue<Node> new_nodes, String method){
+		Queue<Node> new_q;
+		if (method == "BFS"){
+			new_q = new LinkedList<Node>();
+			for (Node n : q) {
+		        new_q.add(n);
+			}
+			for (Node n : new_nodes) {
+		        new_q.add(n);
+			}
+			return new_q;
+		}
+		
+		return null;
 	}
 
 	
