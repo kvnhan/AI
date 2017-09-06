@@ -9,7 +9,7 @@ import java.util.LinkedList;
 import SetUp.Graph;
 import SetUp.Node;
 /**
- * @author jmetzger kvnhan
+ * @author jmetzger kvnhan jwilder
  */
 public class DFS {
 	
