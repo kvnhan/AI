@@ -10,7 +10,6 @@ import SetUp.Graph;
 import SetUp.Node;
 /**
  * @author jmetzger kvnhan
- * CORRECT AS IS WHEN BFS IS COMMENTED OUT
  */
 public class DFS {
 	
@@ -53,7 +52,7 @@ public class DFS {
 			
 			// Dead End
 			if(path.size() == 0){
-				System.out.println("Dead End " + node.getName());
+				System.out.println("** Dead End " + node.getName() + "**\n");
 				graph.setVisited(node);
 				DeadEnd.add(node.getName());
 				queue = pop();
@@ -104,8 +103,8 @@ public class DFS {
 					queue = fixQueue(visitedNode.getFirst(), dummyqueue);
 					c.setvisted();
 					printQueue2(queue);
-					System.out.println("\n");
-					System.out.println("goal reached!\n");
+					//System.out.println("\n");
+					System.out.println("Goal Reached!\n");
 					found = 1;
 				}
 			}

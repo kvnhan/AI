@@ -2,9 +2,11 @@ package SetUp;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+import java.util.Scanner;
 
 import basic_searches.BFS;
 import basic_searches.DFS;
+import basic_searches.DLS;
 
 
 public class Main {
@@ -15,8 +17,6 @@ public class Main {
 		FileReader fr = null;
 		Node startState = new Node("S", 0.0, 0.0, 0);
 		Graph g = new Graph();
-		DFS dfs = new DFS();
-		//BFS bfs = new BFS();
 
 		try{
 			
@@ -54,11 +54,37 @@ public class Main {
 				}
 			}
 			
-			//System.out.println(g.getSize());
-			//g.DFS(startState);
-			dfs.dfs(g, startState);
-			//bfs.bfs(g, startState);
+
+			Scanner in = new Scanner ( System.in );
+			System.out.println("\n===== Project 1 =====");
+			System.out.println("\nPlease Select the Search Algorithm below you wish to execute:");
+			System.out.println ( "\n1) Depth 1st Search\n2) Breadth 1st Search\n3) Depth-Limited Search\n" );
+		    System.out.print ( "Selection: " );
+		    switch ( in.nextInt() ) {
+		      case 1:
+		        System.out.println ( "You picked Depth 1st Search" );
+		        System.out.println("\n===== Queue =====\n");
+		        DFS dfs = new DFS();
+		        dfs.dfs(g, startState);
+		        break;
+		      case 2:
+		        System.out.println ( "You picked Breadth 1st Search" );
+		        System.out.println("\n===== Queue =====\n");
+		        BFS bfs = new BFS();
+		        bfs.bfs(g, startState);
+		        break;
+		      case 3:
+			    System.out.println ( "You picked Depth-Limited Search" );
+			    System.out.println("\n===== Queue =====\n");
+			    DLS dls = new DLS();
+			    dls.dls(g, startState);
+			    break;
+		      default:
+		        System.err.println ( "Unrecognized option" );
+		        break;
+		    }
 			System.out.println("It works");
+			System.out.println("\n===== EOF =====\n\n");
 			
 		}catch(Exception e){
 			
