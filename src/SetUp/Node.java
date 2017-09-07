@@ -77,8 +77,42 @@ public class Node implements Comparable<Node>{
 				distance = direction.get(n);
 			}
 		}
-		
 		return distance;
+	}
+	
+	public double getDist(Node from, Node to){
+		double distance = 0.0;
+		for(Node n: from.direction.keySet()){
+			if(n.getName().equals(to.getName())){
+				distance = from.direction.get(n);
+			}
+		}
+		if(distance == 0){
+			for(Node n: to.direction.keySet()){
+				if(n.getName().equals(from.getName())){
+					distance = to.direction.get(n);
+				}
+			}
+		}
+		return distance;
+	}
+	public double getTotalDistance(LinkedList<Node> list){
+		LinkedList<Node> newList = new LinkedList<Node>();
+		for(Node n: list){
+			newList.addLast(n);
+		}
+		double totalDist = 0.0;
+		Node temp = new Node("Dummy", 0.0, 0.0, 0);
+		for(Node node: newList){
+			if(node.getName().equals("S")){
+				totalDist = 0.0;
+			}else{
+				totalDist += getDist(temp, node); 
+			}
+			temp = node;
+		}
+		
+		return totalDist;
 	}
 	
 	public void setCost(double c){

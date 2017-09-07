@@ -40,9 +40,8 @@ public class DFS {
 			queue.add(startQueue);
 			visited.add(startState.getName());
 			visitedNode.add(startState);
-			System.out.println("Expand " + visited.getFirst());
+			System.out.println("\nExpand " + visited.getFirst());
 			printQueue2(queue);
-			System.out.println("\n");
 			queue = new LinkedList<LinkedList<Node>>();
 			path = graph.getChildrenOf(node);
 			path = sortPath(path, node);
@@ -52,7 +51,6 @@ public class DFS {
 			
 			// Dead End
 			if(path.size() == 0){
-				//System.out.println("** Dead End " + node.getName() + "**\n");
 				graph.setVisited(node);
 				DeadEnd.add(node.getName());
 				queue = pop();
@@ -66,7 +64,6 @@ public class DFS {
 				visitedNode.addFirst(node);
 				visited.addFirst(node.getName());
 				graph.setVisited(node);
-				//printQueue(path);	
 			}
 		}
 		
@@ -75,7 +72,6 @@ public class DFS {
 			if(child.getAdjacentNodes().size() == 0){
 				child.setAdjacentNodes(visitedNode);
 				child.getAdjacentNodes().addFirst(child);
-				//printQueue(child.getAdjacentNodes());
 		
 				if(queue.size() < 2){
 					queue.addLast(child.getAdjacentNodes());
@@ -91,19 +87,17 @@ public class DFS {
 		for(Node c: path){
 			if(c.visited == 0 && found == 0){
 				if(!c.getName().equals("G")){
-					System.out.println("Expand " + c.getName());
+					System.out.println("\nExpand " + c.getName());
 					queue = fixQueue(visitedNode.getFirst(), dummyqueue);
 					c.setvisted();
 					printQueue2(queue);
-					System.out.println("\n");
 					found = 0 ;
 					dfs(graph, c);
 				}else{
-					System.out.println("Expand " + c.getName());
+					System.out.println("\nExpand " + c.getName());
 					queue = fixQueue(visitedNode.getFirst(), dummyqueue);
 					c.setvisted();
 					printQueue2(queue);
-					//System.out.println("\n");
 					System.out.println("\nGoal Reached!\n");
 					found = 1;
 				}
