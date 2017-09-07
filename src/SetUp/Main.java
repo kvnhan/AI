@@ -8,6 +8,12 @@ import basic_searches.BFS;
 import basic_searches.DFS;
 import basic_searches.DLS;
 
+/**
+ * main.java
+ * @author jmetzger kvnhan jwilder
+ * @version 1.2
+ */
+
 
 public class Main {
 
