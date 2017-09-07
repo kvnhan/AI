@@ -3,6 +3,7 @@
  */
 package SetUp;
 
+import java.util.Collections;
 import java.util.LinkedList;
 
 /**
@@ -13,22 +14,30 @@ public class Queue {
 	
 	public LinkedList<LinkedList<Node>> queue = new LinkedList<LinkedList<Node>>();
 	public LinkedList<String> visited = new LinkedList<String>();
-	//private LinkedList<String> DeadEnd = new LinkedList<String>();
 	public LinkedList<String> dups = new LinkedList<String>();
-	//private LinkedList<Node> visitedNode = new LinkedList<Node>();
 	
 	public Queue() {
 		
 	}
 	
-
-	public LinkedList<LinkedList<Node>> fixQueue(Node child, LinkedList<LinkedList<Node>> dummyqueue){
+	public Node getExpandedNode(){
+		Node node;
+		node = queue.getFirst().getFirst();
+		return node;
+	}
+	
+	public LinkedList<Node> getPathFrom(Node node){
+		LinkedList<Node> path = new LinkedList<Node>();
+		path = queue.getFirst();
+		return path;
+	}
+	
+	public LinkedList<LinkedList<Node>> fixDFSQueue(Node child, LinkedList<LinkedList<Node>> dummyqueue){
 
 		LinkedList<LinkedList<Node>> queue2 = new LinkedList<LinkedList<Node>>();
 		for(LinkedList<Node> node: dummyqueue){
 			queue2.addLast(node);
 		}
-
 		for(LinkedList<Node> node: queue){
 			if(!node.getFirst().getName().equals(child.getName())){
 				queue2.addLast(node);
@@ -37,13 +46,19 @@ public class Queue {
 		return queue2;
 	}
 
-	public LinkedList<LinkedList<Node>> pop(){
-		queue.removeFirst();
-
+	public LinkedList<LinkedList<Node>> fixBFSQueue(LinkedList<LinkedList<Node>> dummyqueue){
+		for(LinkedList<Node> node: dummyqueue){
+			queue.addLast(node);
+		}
 		return queue;
 	}
+	
+	public LinkedList<LinkedList<Node>> pop(){
+		queue.removeFirst();
+		return queue;
+	}
+	
 	public void printQueue(LinkedList<Node> list){
-
 		int size = list.size();
 		int count = 0;
 		for(Node n: list){
@@ -54,43 +69,58 @@ public class Queue {
 				System.out.print("" + n.getName() + ",");
 			}
 		}
-
+	}
+	
+	//Remove any node that is repeated 
+	public LinkedList<Node> removePath(LinkedList<Node> p, Node node){
+		LinkedList<Node> l = new LinkedList<Node>();
+		for(Node n: p){
+			if(!n.getName().equals(node.getName())){
+				l.addFirst(n);
+			}						
+		}
+		return l;
 	}
 	
 	public LinkedList<Node> removedVisitedPath(LinkedList<Node> p){
 		LinkedList<Node> l = new LinkedList<Node>();
 		for(Node n: p){
-			//System.out.println(n.getName() + " " + n.visited);
 			if(n.visited == 0 && !visited.contains(n.getName())){
-				//System.out.println(n.getName() + " " + n.visited);
 				l.addFirst(n);
 			}
-
-
 		}
 		return l;
 	}
 	
 	public LinkedList<Node> sortPath(LinkedList<Node> list, Node n){
-		double temp = 0.0;
 		LinkedList<Node> newPath = new LinkedList<Node>();
-		for(int i = 0; i < list.size(); i++){
-			if(list.get(i).getDistanceTo(n) > temp && !dups.contains(list.get(i).getName())){
-				newPath.addLast(list.get(i));
-				temp = list.get(i).getDistanceTo(n);
+		LinkedList<String> stringList = new LinkedList<String>();
 
-			}else{
-				newPath.addFirst(list.get(i));
-				dups.addFirst(list.get(i).getName());
+		for(Node node: list){
+			stringList.add(node.getName());
+		}
+		Collections.sort(stringList);
+		for(String str: stringList){
+			for(Node node: list){
+				if(node.getName().equals(str) && !dups.contains(node.getName())){
+					newPath.addLast(node);		
+					dups.addFirst(node.getName());
+				}
 			}
 		}
-
-		return newPath;
+		return newPath;	
 	}
 	
+	public boolean IsDescendant(LinkedList<Node> list, Node path){
+		for(Node node: list){
+			if(node.getName().equals(path.getName())){
+				return true;
+			}
+		}
+		return false;
+	}
 	
 	public void printQueue2(LinkedList<LinkedList<Node>> list){
-
 		System.out.print("[");
 		for(LinkedList<Node> nodes: list){
 			for(Node n: nodes){

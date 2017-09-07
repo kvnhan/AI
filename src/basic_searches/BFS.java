@@ -52,7 +52,7 @@ public boolean bfs(Graph graph, Node node, Node from){
 			path = removePath(path, from);			
 			// Dead End
 			if(path.size() == 0){
-				System.out.println("Expand " + node.getName() + "\n");
+				System.out.println("Expand " + node.getName());
 				printQueue2(queue);
 				graph.setVisited(node);
 				queue = pop();
@@ -73,12 +73,11 @@ public boolean bfs(Graph graph, Node node, Node from){
 				child.reset();
 				child.setAdjacentNodes(queue.getFirst());
 				child.getAdjacentNodes().addFirst(child);
-				printQueue(child.getAdjacentNodes());
 				System.out.println();
 				dummyqueue.addLast(child.getAdjacentNodes());	
 			}
 		}		
-		System.out.println("Expand " + node.getName() + "\n");
+		System.out.println("Expand " + node.getName());
 		queue = fixQueue(dummyqueue);
 		printQueue2(queue);
 		if(!expanded.contains(node.getName())){
@@ -94,8 +93,6 @@ public boolean bfs(Graph graph, Node node, Node from){
 			System.out.println("Goal Reached!");
 		}
 		
-		
-		
 		return false;
 	}
 
@@ -108,12 +105,11 @@ public boolean bfs(Graph graph, Node node, Node from){
 	
 	public LinkedList<LinkedList<Node>> pop(){
 		queue.removeFirst();
-		
 		return queue;
 	}
 	
 	public void printQueue(LinkedList<Node> list){
-		
+	
 		int size = list.size();
 		int count = 0;
 		for(Node n: list){
@@ -123,8 +119,7 @@ public boolean bfs(Graph graph, Node node, Node from){
 			}else{
 				System.out.print("" + n.getName() + ",");	
 			}
-		}
-		
+		}		
 	}
 	
 	public LinkedList<Node> removePath(LinkedList<Node> p, Node node){
@@ -133,18 +128,15 @@ public boolean bfs(Graph graph, Node node, Node from){
 			if(!n.getName().equals(node.getName())){
 				//System.out.println(n.getName() + " " + n.visited);
 				l.addFirst(n);
-			}
-			
-			
+			}						
 		}
 		return l;
 	}
+	
 	public LinkedList<Node> removedVisitedPath(LinkedList<Node> p){
 		LinkedList<Node> l = new LinkedList<Node>();
 		for(Node n: p){
-			//System.out.println(n.getName() + " " + n.visited);
 			if(n.visited == 0 && !visited.contains(n.getName())){
-				//System.out.println(n.getName() + " " + n.visited);
 				l.addFirst(n);
 			}
 			
@@ -189,9 +181,9 @@ public boolean bfs(Graph graph, Node node, Node from){
 					return;
 				}
 			}
-			System.out.print("<");
+			System.out.print(" <");
 			printQueue(nodes);
-			System.out.print(">");
+			System.out.print("> ");
 		}
 		System.out.print("]");
 		System.out.println();
