@@ -43,18 +43,33 @@ public class Main {
 						node1 = new Node(token[0], 0.0, Double.parseDouble(token[2]), 0);
 						node2 = new Node(token[1], 0.0, Double.parseDouble(token[2]), 0);
 						node1.pairNode(node2);
+						node1.addEdge(node2, Double.parseDouble(token[2]));
+						node2.addEdge(node1, Double.parseDouble(token[2]));
 						g.createGraph(node1, node2);
 						
-					}else{
+					}else if(token.length == 2){
 						Node oldnode = new Node(token[0], 0.0, 0.0, 0);
+						g.heuristic_dict.put(token[0], Double.parseDouble(token[1]));
 						if(g.NodeExist(oldnode)){
-							g.changeNodeCost(oldnode, Double.parseDouble(token[1]));	
+							g.changeNodeCost(oldnode, Double.parseDouble(token[1]));
+
 						}
 					}
 				}
 			}
+			System.out.println("---BFS---");
+			//g.General_Search("BFS");
+			System.out.println("---DFS---");
+			//g.General_Search("DFS");
+			System.out.println("---DLS---");
+			//g.General_Search("DLS");
+			System.out.println("---UCS---");
+			//g.General_Search("UCS");
+			System.out.println("---Greedy---");
+			//g.General_Search("Greedy");
+			System.out.println("---A*---");
+			g.General_Search("A*");
 			
-
 			Scanner in = new Scanner ( System.in );
 			System.out.println("\n===== Project 1 =====");
 			System.out.println("\nPlease Select the Search Algorithm below you wish to execute:");
@@ -123,7 +138,11 @@ public class Main {
 			System.out.println("\n===== EOF =====\n\n");
 			
 		}catch(Exception e){
-			
+			System.out.println(e.getMessage());
+			System.out.println(e.getCause());
+			System.out.println(e.getLocalizedMessage());
+			System.out.println(e.getClass());
+			System.out.println(e.toString());
 			System.out.println("No file exists");
 			
 		}

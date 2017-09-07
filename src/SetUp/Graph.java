@@ -1,13 +1,20 @@
 package SetUp;
+
 import java.util.AbstractQueue;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.PriorityQueue;
 import java.util.Queue;
+import java.util.Stack;
 
 public class Graph {
 	HashMap<Node, Node> graph = new HashMap<Node, Node>();
-	
+	LinkedList<Node> visited = new LinkedList<Node>();
+	LinkedList<Edge> edges = new LinkedList<Edge>();
+	LinkedList<Path> pathqueue = new LinkedList<Path>();
+	HashMap<String, Double> heuristic_dict = new HashMap<String, Double>();
 	
 	Graph(){
 	}
@@ -15,8 +22,7 @@ public class Graph {
 	// Method to great a graph, sort of
 	void createGraph(Node node1, Node node2){
 		graph.put(node1, node2);
-		
-		
+		heuristic_dict.put("G", 0.0);
 	}
 	
 	// A method to get a list of paths
@@ -28,8 +34,7 @@ public class Graph {
 				
 			}else if(graph.get(n).getName().equals(node.getName())){
 				list.addFirst(n);
-			}
-				
+			}		
 		}
 			
 			return list;
@@ -100,41 +105,267 @@ public class Graph {
 		}
 	}
 	
-	public Node General_Search(){
-		Queue<Node> q = new LinkedList<Node>();
-		Node goal_node = new Node("G", 0.0, 0.0, 0);
-		Node start_node = new Node("S", 0.0, 0.0, 0);
-		q.add(start_node);
+	
+	public Node General_Search(String method){
+		
+		LinkedList<Node> nodepath = new LinkedList<Node>();
+		Node start_node = this.getS();
+		nodepath.add(start_node);
+		Path path = new Path(nodepath, 0.0);
+		pathqueue.add(path);
 		while(true){
-			if (q.isEmpty()){
+			printQueue2(pathqueue);
+			if (pathqueue.isEmpty()){
+				System.out.print("Fail");
 				return null;
 			}
-			Node curr_node = q.remove();
-			if (curr_node.name == goal_node.name){
+			
+			Path curr_path = pathqueue.remove();
+			Node curr_node = curr_path.p.getFirst();
+			visited.add(curr_node);
+			if (curr_node.name.equalsIgnoreCase("G")){
 				return curr_node;
 			}
 			LinkedList<Node> new_nodes = getChildrenOf(curr_node);
-			Queue<Node> new_q = AddToQueue(q, new_nodes, "BFS");
-			q = new_q;
+			Collections.sort(new_nodes, new Comparator<Node>(){
+				   @Override
+				   public int compare(Node o1, Node o2){
+				        if(o1.name.compareTo(o2.name) < 0){
+				           return -1; 
+				        }
+				        if(o1.name.compareTo(o2.name) > 0){
+				           return 1; 
+				        }
+				        return 0;
+				   }
+				}); 
+
+			LinkedList<Path> new_paths = new LinkedList<Path>();
+
+			for (Node n : new_nodes) {
+				Boolean in_path = false;
+				LinkedList<Node> p = new LinkedList<Node>();
+				for(Node i : path.p){
+					if(n.name.equalsIgnoreCase(i.name)){
+						in_path = true;
+					}
+				}
+
+				if (!in_path){
+			   Double newcost = 0.0;
+			   if(!path.p.isEmpty()){
+			   newcost = path.dist + distance(path.p.getFirst(), n);
+			   }
+				p.addAll(path.p);
+				p.addFirst(n);
+				Path newpath = new Path(p, newcost);
+				new_paths.add(newpath);
+				}
+				else{
+				}
+			}		
+			
+			AddToQueue(new_paths, method);			
+			path = pathqueue.getFirst();
+			try {
+				Thread.sleep(500);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	}
 	
-	public Queue<Node> AddToQueue(Queue<Node> q, Queue<Node> new_nodes, String method){
-		Queue<Node> new_q;
-		if (method == "BFS"){
-			new_q = new LinkedList<Node>();
-			for (Node n : q) {
-		        new_q.add(n);
+	private Double distance(Node first, Node n) {
+		 
+		for(Edge e : n.edges){
+//			 System.out.println("From: " + n.name);
+//			 System.out.println("To: " + e.to.name);
+//			 System.out.println("Needs to match: " + first.name);
+			if(e.to.name.equalsIgnoreCase(first.name)){
+//				System.out.println("11: " + e.dist);
+				return e.dist;
 			}
-			for (Node n : new_nodes) {
-		        new_q.add(n);
-			}
-			return new_q;
 		}
-		
-		return null;
+		return 0.0;
 	}
 
+	public void AddToQueue(LinkedList<Path> new_paths, String method){
+
+		if (method == "BFS"){
+			for (Path n : new_paths) {
+			pathqueue.addLast(n);
+			}
+		}
+		
+		if (method == "DFS"){
+			Stack<Path> pathstack = new Stack<Path>();
+		
+			for (Path n : new_paths) {
+			pathstack.push(n);
+			}
+			
+			while(!pathstack.isEmpty()){
+				Path curr = pathstack.pop();
+				pathqueue.addFirst(curr);
+			}
+		}
+		
+		if (method == "DLS"){
+
+			Stack<Path> pathstack = new Stack<Path>();
+			
+			for (Path n : new_paths) {
+			pathstack.push(n);
+			}
+			
+			while(!pathstack.isEmpty()){
+				Path curr = pathstack.pop();
+				if(curr.p.size() <= 3){
+				pathqueue.addFirst(curr);
+				}
+			}
+		}
+		
+		if (method == "UCS"){
+			for (Path n : new_paths) {
+			pathqueue.addLast(n);
+			}
+			Collections.sort(pathqueue, new Comparator<Path>(){
+				   @Override
+				   public int compare(Path o1, Path o2){
+				        if(o1.dist.compareTo(o2.dist) < 0){
+				           return -1; 
+				        }
+				        if(o1.dist.compareTo(o2.dist) > 0){
+				           return 1; 
+				        }
+				        return 0;
+				   }
+				}); 
+			
+		}
+		
+		if (method == "Greedy"){
+			for (Path n : new_paths) {
+				pathqueue.addLast(n);
+				}
+			for (Path p: pathqueue){
+
+				p.dist = heuristic_dict.get(p.p.getFirst().name);
+			}
+			Collections.sort(pathqueue, new Comparator<Path>(){
+				   @Override
+				   public int compare(Path o1, Path o2){
+				        if(o1.dist.compareTo(o2.dist) < 0){
+				           return -1; 
+				        }
+				        if(o1.dist.compareTo(o2.dist) > 0){
+				           return 1; 
+				        }
+				        return 0;
+				   }
+				}); 
+		}
+		
+		if (method == "A*"){
+			for (Path n : new_paths) {
+				n.dist += heuristic_dict.get(n.p.getFirst().name);
+				pathqueue.addLast(n);
+				}
+				Collections.sort(pathqueue, new Comparator<Path>(){
+					   @Override
+					   public int compare(Path o1, Path o2){
+					        if(o1.dist.compareTo(o2.dist) < 0){
+					           return -1; 
+					        }
+					        if(o1.dist.compareTo(o2.dist) > 0){
+					           return 1; 
+					        }
+					        return 0;
+					   }
+					}); 
+				
+			}
+		
+	}
+
+	public void printQueue(Path list){
+
+		int size = list.
+				p.size();
+		int count = 0;
+		for(Node n: list.p){
+			count++;
+			if(size == count){
+				System.out.print("" + n.getName() + "");
+			}else{
+				System.out.print("" + n.getName() + ",");
+			}
+		}
+
+
+	}
 	
+	public void printQueue2(Queue<Path> list){
+
+		System.out.print("[");
+		
+		for(Path nodes: list){
+			System.out.print(nodes.dist);
+			for(Node n: nodes.p){
+				
+				if(nodes.p.size() == 1){
+					System.out.println("<" + n.getName() + ">]");
+					return;
+				}
+			}
+			System.out.print("<");
+			printQueue(nodes);
+			System.out.print(">");
+		}
+		System.out.print("]");
+		System.out.println();
+	}
+	
+	public double getTotalDistance(LinkedList<Node> list){
+		LinkedList<Node> newList = new LinkedList<Node>();
+		for(Node n: list){
+			newList.addLast(n);
+		}
+		double totalDist = 0.0;
+		Node temp = new Node("Dummy", 0.0, 0.0, 0);
+		for(Node node: newList){
+			if(node.getName().equals("S")){
+				totalDist = 0.0;
+			}else{
+				totalDist += getDist(temp, node); 
+				System.out.println("Total Dist:" + totalDist);
+			}
+			temp = node;
+		}
+		
+		return totalDist;
+	}
+	
+	public double getDist(Node from, Node to){
+		double distance = 0.0;
+		for(Node n: from.direction.keySet()){
+			if(n.getName().equals(to.getName())){
+				distance = from.direction.get(n);
+			}
+		}
+		if(distance == 0){
+			for(Node n: to.direction.keySet()){
+				if(n.getName().equals(from.getName())){
+					distance = to.direction.get(n);
+				}
+			}
+		}
+		
+		System.out.println("Distance from " + from.name + " to " + to.name + ": " + distance);
+		return distance;
+	}
+
 
 }

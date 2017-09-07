@@ -5,6 +5,8 @@ import java.util.HashMap;
 public class Node implements Comparable<Node>{
 	String name;
 	double cost, distance;
+	LinkedList<Edge> edges = new LinkedList<Edge>();
+	
 	public int visited; // 0 = not visited, 1 = visited
 	HashMap<Node, Double> direction = new HashMap<Node, Double>();
 	public LinkedList<Node> adjacentNodes = new LinkedList<Node>();;
@@ -30,6 +32,11 @@ public class Node implements Comparable<Node>{
 		direction.put(n, distance);
 		path.add(direction);
 		
+	}
+	
+	public void addEdge(Node n, Double d){
+		Edge e = new Edge(n, d);
+		this.edges.add(e);
 	}
 	
 	public void reset(){
