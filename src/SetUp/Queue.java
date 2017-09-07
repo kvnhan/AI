@@ -4,6 +4,7 @@
 package SetUp;
 
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.LinkedList;
 
 /**
@@ -21,6 +22,8 @@ public class Queue {
 	public LinkedList<LinkedList<Node>> getQueue(){
 		return queue;
 	}
+	
+
 	public Node getFromnode(){
 		return queue.getFirst().get(1);
 		
@@ -41,6 +44,7 @@ public class Queue {
 
 	}
 	
+	// Use to order the queue for DFS 
 	public LinkedList<LinkedList<Node>> fixDFSQueue(Node child, LinkedList<LinkedList<Node>> dummyqueue){
 
 		LinkedList<LinkedList<Node>> queue2 = new LinkedList<LinkedList<Node>>();
@@ -55,6 +59,7 @@ public class Queue {
 		return queue2;
 	}
 
+	// Use to order queue for BFS
 	public LinkedList<LinkedList<Node>> fixBFSQueue(LinkedList<LinkedList<Node>> dummyqueue){
 		for(LinkedList<Node> node: dummyqueue){
 			queue.addLast(node);
@@ -62,6 +67,31 @@ public class Queue {
 		return queue;
 	}
 	
+	
+	// Use to order queue for Uniformed Cost Search
+	public LinkedList<LinkedList<Node>> fixUCSQueue(LinkedList<LinkedList<Node>> dummyqueue){
+		Node dummyNode = new Node("Dummy", 0.0,0.0,0);
+		
+		HashMap<Double, LinkedList<Node>> map = new HashMap<Double, LinkedList<Node>>();
+		double distance = 0.0;
+		LinkedList<Double> numlist = new LinkedList<Double>();		
+		for(LinkedList<Node> node: dummyqueue){
+			distance = dummyNode.getTotalDistance(node);
+			numlist.add(distance);
+			map.put(distance, node);
+		}
+		Collections.sort(numlist);
+		//Might need to consider a tie
+		for(Double d: numlist){
+			for(Double doub: map.keySet()){
+				if(doub == d){
+					queue.addLast(map.get(doub));
+				}
+			}
+		}
+		
+		return queue;
+	}
 	public LinkedList<LinkedList<Node>> pop(){
 		queue.removeFirst();
 		return queue;
