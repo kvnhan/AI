@@ -14,9 +14,15 @@ public class Queue {
 	
 	public LinkedList<LinkedList<Node>> queue = new LinkedList<LinkedList<Node>>();
 	public LinkedList<String> visited = new LinkedList<String>();
-	public LinkedList<String> dups = new LinkedList<String>();
-	
+
 	public Queue() {
+	}
+	
+	public LinkedList<LinkedList<Node>> getQueue(){
+		return queue;
+	}
+	public Node getFromnode(){
+		return queue.getFirst().get(1);
 		
 	}
 	
@@ -26,10 +32,13 @@ public class Queue {
 		return node;
 	}
 	
-	public LinkedList<Node> getPathFrom(Node node){
-		LinkedList<Node> path = new LinkedList<Node>();
-		path = queue.getFirst();
-		return path;
+	public LinkedList<Node> peekFirst(){
+		return queue.getFirst();
+	}
+	
+	public LinkedList<Node> getPathFrom(){
+		return queue.getFirst();
+
 	}
 	
 	public LinkedList<LinkedList<Node>> fixDFSQueue(Node child, LinkedList<LinkedList<Node>> dummyqueue){
@@ -94,8 +103,8 @@ public class Queue {
 	
 	public LinkedList<Node> sortPath(LinkedList<Node> list, Node n){
 		LinkedList<Node> newPath = new LinkedList<Node>();
+		LinkedList<String> dups = new LinkedList<String>();
 		LinkedList<String> stringList = new LinkedList<String>();
-
 		for(Node node: list){
 			stringList.add(node.getName());
 		}
@@ -120,18 +129,18 @@ public class Queue {
 		return false;
 	}
 	
-	public void printQueue2(LinkedList<LinkedList<Node>> list){
+	public void printQueue2(){
 		System.out.print("[");
-		for(LinkedList<Node> nodes: list){
+		for(LinkedList<Node> nodes: queue){
 			for(Node n: nodes){
 				if(nodes.size() == 1){
 					System.out.println("<" + n.getName() + ">]");
 					return;
 				}
 			}
-			System.out.print("<");
+			System.out.print(" <");
 			printQueue(nodes);
-			System.out.print(">");
+			System.out.print("> ");
 		}
 		System.out.print("]");
 		System.out.println();

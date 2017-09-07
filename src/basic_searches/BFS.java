@@ -9,17 +9,18 @@ import java.util.LinkedList;
 
 import SetUp.Graph;
 import SetUp.Node;
+import SetUp.Queue;
 
 public class BFS {
 
-	LinkedList<LinkedList<Node>> queue = new LinkedList<LinkedList<Node>>();
+	//LinkedList<LinkedList<Node>> queue = new LinkedList<LinkedList<Node>>();
 	LinkedList<String> visited = new LinkedList<String>();
 	LinkedList<String> DeadEnd = new LinkedList<String>();
 	LinkedList<String> dups = new LinkedList<String>();
 	LinkedList<String> expanded = new LinkedList<String>();
 	LinkedList<Node> visitedNode = new LinkedList<Node>();
 	int found = 0;
-	Node prev = null;
+	Queue queueClass = new Queue();
 
 	public BFS(){
 	
@@ -40,54 +41,57 @@ public boolean bfs(Graph graph, Node node, Node from){
 			node = startState;
 			path = graph.getChildrenOf(startState);
 			startQueue.add(startState);
-			queue.add(startQueue);
+			queueClass.addQueue(startQueue);
 			visited.add(startState.getName());
 			visitedNode.add(startState);
 			path = graph.getChildrenOf(node);
-			path = sortPath(path, node);
+			path = queueClass.sortPath(path, node);
 			expanded.add(node.getName());
 			node.getAdjacentNodes().addFirst(node);
 		}else{	
 			path = graph.getChildrenOf(node);
-			path = removePath(path, from);			
+			path = queueClass.removePath(path, from);	
 			// Dead End
 			if(path.size() == 0){
 				System.out.println("Expand " + node.getName());
-				printQueue2(queue);
+				queueClass.printQueue2();
 				graph.setVisited(node);
-				queue = pop();
-				node = queue.getFirst().get(0);
-				from = queue.getFirst().get(1);
+				queueClass.pop();
+				node = queueClass.getExpandedNode();
+				from = queueClass.getFromnode();
 				path = graph.getChildrenOf(node);
 				path = sortPath(path, node);	
 			}else{
-				path = sortPath(path, node);
+				path = queueClass.sortPath(path, node);
 				visitedNode.addFirst(node);
 				visited.addFirst(node.getName());
 				graph.setVisited(node);		
 			}
 		}
 		// Get A list of Adjacent Node
+		LinkedList<Node> adjNode = new LinkedList<Node>();
+		adjNode = queueClass.getPathFrom();
 		for(Node child: path){
-			if(!child.getName().equals(from.getName()) && !IsDescendant(queue.getFirst(), child)){
+			System.out.println(child.getName());
+			if(!child.getName().equals(from.getName()) && !IsDescendant(queueClass.peekFirst(), child)){
 				child.reset();
-				child.setAdjacentNodes(queue.getFirst());
+				child.setAdjacentNodes(adjNode);
 				child.getAdjacentNodes().addFirst(child);
-				System.out.println();
 				dummyqueue.addLast(child.getAdjacentNodes());	
 			}
-		}		
+		}
 		System.out.println("Expand " + node.getName());
-		queue = fixQueue(dummyqueue);
-		printQueue2(queue);
+		queueClass.fixBFSQueue(dummyqueue);
+		queueClass.printQueue2();
 		if(!expanded.contains(node.getName())){
 			expanded.add(node.getName());
 		}
+		
 		// Traversing the graph to Find G Node
-		if(!queue.getFirst().getFirst().getName().equals("G")){
-			queue = pop();
-			Node newnode = queue.getFirst().get(0);
-			Node fromNode = queue.getFirst().get(1);
+		if(!queueClass.getExpandedNode().getName().equals("G")){
+			queueClass.pop();
+			Node newnode = queueClass.getExpandedNode();
+			Node fromNode = queueClass.getFromnode();
 			bfs(graph, newnode, fromNode);
 		}else{
 			System.out.println("Goal Reached!");
@@ -96,18 +100,8 @@ public boolean bfs(Graph graph, Node node, Node from){
 		return false;
 	}
 
-	public LinkedList<LinkedList<Node>> fixQueue(LinkedList<LinkedList<Node>> dummyqueue){
-		for(LinkedList<Node> node: dummyqueue){
-			queue.addLast(node);
-		}
-		return queue;
-	}
-	
-	public LinkedList<LinkedList<Node>> pop(){
-		queue.removeFirst();
-		return queue;
-	}
-	
+
+
 	public void printQueue(LinkedList<Node> list){
 	
 		int size = list.size();

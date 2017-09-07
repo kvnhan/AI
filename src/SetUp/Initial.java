@@ -36,7 +36,7 @@ public class Initial {
 		visited.add(startState.getName());
 		visitedNode.add(startState);
 		System.out.println("Expand " + visited.getFirst());
-		queueClass.printQueue2(queue);
+		queueClass.printQueue2();
 		System.out.println("\n");
 		queue = new LinkedList<LinkedList<Node>>();
 		path = graph.getChildrenOf(node);
