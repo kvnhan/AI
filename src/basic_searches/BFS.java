@@ -53,7 +53,7 @@ public boolean bfs(Graph graph, Node node, Node from){
 			path = queueClass.removePath(path, from);	
 			// Dead End
 			if(path.size() == 0){
-				System.out.println("Expand " + node.getName());
+				System.out.println("\nExpand " + node.getName());
 				queueClass.printQueue2();
 				graph.setVisited(node);
 				queueClass.pop();
@@ -72,7 +72,6 @@ public boolean bfs(Graph graph, Node node, Node from){
 		LinkedList<Node> adjNode = new LinkedList<Node>();
 		adjNode = queueClass.getPathFrom();
 		for(Node child: path){
-			System.out.println(child.getName());
 			if(!child.getName().equals(from.getName()) && !IsDescendant(queueClass.peekFirst(), child)){
 				child.reset();
 				child.setAdjacentNodes(adjNode);
@@ -80,7 +79,7 @@ public boolean bfs(Graph graph, Node node, Node from){
 				dummyqueue.addLast(child.getAdjacentNodes());	
 			}
 		}
-		System.out.println("Expand " + node.getName());
+		System.out.println("\nExpand " + node.getName());
 		queueClass.fixBFSQueue(dummyqueue);
 		queueClass.printQueue2();
 		if(!expanded.contains(node.getName())){
@@ -94,7 +93,7 @@ public boolean bfs(Graph graph, Node node, Node from){
 			Node fromNode = queueClass.getFromnode();
 			bfs(graph, newnode, fromNode);
 		}else{
-			System.out.println("Goal Reached!");
+			System.out.println("\nGoal Reached!");
 		}
 		
 		return false;
