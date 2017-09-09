@@ -125,10 +125,23 @@ public class Initial {
 			System.out.println("\n===== Queue =====\n");
 			g.General_Search("BS");
 			break;
+		case 10:
+			System.out.println("\nPrinting ALL SEARCH METHODS");
+			g.General_Search("DFS");
+			g.General_Search("BFS");
+			g.General_Search("DLS");
+			g.General_Search("IDS");
+			g.General_Search("UCS");
+			g.General_Search("Greedy");
+			g.General_Search("A*");
+			g.General_Search("HCS");
+			g.General_Search("BS");
+			break;
 		default:
 			System.err.println("Wrong Input");
-			return;
+			break;
 		}
+		in.close();
 
 	}
 

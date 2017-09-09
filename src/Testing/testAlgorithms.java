@@ -3,14 +3,8 @@
  */
 package Testing;
 
-import static org.junit.Assert.*;
-
-import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.ExternalResource;
 
-import SetUp.Node;
-import basic_searches.Depth_First;
 
 /**
  * @author jmetzger and kvnhan
@@ -20,9 +14,6 @@ import basic_searches.Depth_First;
 
 public class testAlgorithms {
 	
-	Node startState = new Node("S", 0.0, 0.0, 0);
-    Depth_First dfs = new Depth_First();
-
     @Test
     public void test() throws Exception
     {

@@ -1,17 +1,13 @@
 package SetUp;
 
-import java.util.AbstractQueue;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.LinkedList;
-import java.util.PriorityQueue;
 import java.util.Queue;
-import java.util.Stack;
 
 import basic_searches.A_Star;
 import basic_searches.Breadth_First;
-import basic_searches.Beam;
 import basic_searches.Depth_First;
 import basic_searches.Depth_Limited;
 import basic_searches.Greedy;
@@ -183,7 +179,7 @@ public class Graph {
 			AddToQueue(new_paths, method);			
 			path = pathqueue.getFirst();
 			try {
-				Thread.sleep(500);
+				Thread.sleep(1);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

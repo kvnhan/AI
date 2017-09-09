@@ -1,14 +1,6 @@
 package SetUp;
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileReader;
-import java.util.LinkedList;
-import java.util.Scanner;
-
-import basic_searches.Breadth_First;
-import basic_searches.Depth_First;
-import basic_searches.Depth_Limited;
-import basic_searches.Iterative_Deepening;
 
 /**
  * main.java
@@ -25,14 +17,14 @@ public class Main {
 		
 	    BufferedReader br = null;  
 		FileReader fr = null;
-		Node startState = new Node("S", 0.0, 0.0, 0);
+		//Node startState = new Node("S", 0.0, 0.0, 0);
 		Graph g = new Graph();
-		LinkedList<Node> startQueue = new LinkedList<Node>();
+		//LinkedList<Node> startQueue = new LinkedList<Node>();
 		Initial i = new Initial();
 
 		System.out.println("\n===== Project 1 =====");
 		System.out.println("\nPlease Select the Search Algorithm below you wish to execute:");
-		System.out.println ( "\n1) Depth 1st Search\n2) Breadth 1st Search\n3) Depth-Limited Search\n4) Iterative Deepening Search\n5) Uniform Cost Search (Branch-and-bound)\n6) Greedy Search\n7) A*\n8) Hill-Climbing Search\n9) Beam Search\n" );
+		System.out.println ( "\n1) Depth 1st Search\n2) Breadth 1st Search\n3) Depth-Limited Search\n4) Iterative Deepening Search\n5) Uniform Cost Search (Branch-and-bound)\n6) Greedy Search\n7) A*\n8) Hill-Climbing Search\n9) Beam Search\n10)PRINT ALL\n" );
 	    System.out.print ( "Selection: " );
 		
 	    i.parse(br, fr, args, g);

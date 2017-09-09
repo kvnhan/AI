@@ -42,7 +42,7 @@ public class Iterative_Deepening {
 		LinkedList<Node> path = new LinkedList<Node>();
 		Node startState;
 		startState = graph.getS();
-		int size = list.size();
+		//int size = list.size();
 	
 		System.out.println("L=" + depth);
 			

@@ -4,14 +4,10 @@
  */
 package basic_searches;
 
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedList;
 
-import SetUp.Graph;
-import SetUp.Node;
 import SetUp.Path;
-import SetUp.Queue;
 
 public class Breadth_First {
 	
