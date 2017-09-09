@@ -2,11 +2,13 @@ package SetUp;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+import java.util.LinkedList;
 import java.util.Scanner;
 
 import basic_searches.BFS;
 import basic_searches.DFS;
 import basic_searches.DLS;
+import basic_searches.IDS;
 
 /**
  * main.java
@@ -17,12 +19,15 @@ import basic_searches.DLS;
 
 public class Main {
 
+	//private static final String FILENAME = "C:/Users/Kien Nhan/Downloads/graph.txt";
+
 	public static void main(String[] args) {
 		
 	    BufferedReader br = null;  
 		FileReader fr = null;
 		Node startState = new Node("S", 0.0, 0.0, 0);
 		Graph g = new Graph();
+		LinkedList<Node> startQueue = new LinkedList<Node>();
 
 		try{
 			
@@ -74,7 +79,7 @@ public class Main {
 			System.out.println("---Greedy---");
 			//g.General_Search("Greedy");
 			System.out.println("---A*---");
-			g.General_Search("A*");
+			//g.General_Search("A*");
 			
 			Scanner in = new Scanner ( System.in );
 			System.out.println("\n===== Project 1 =====");
@@ -103,8 +108,8 @@ public class Main {
 		      case 4:
 				System.out.println ( "\nSearch Method: Iterative Deepening Search" );
 			    System.out.println("\n===== Queue =====\n");
-			    //IDS ids = new IDS();
-			    //ids.ids(g, startState, startState);
+			    IDS ids = new IDS();
+			    ids.ids(g, startState, startState, 0, startQueue);
 			    break;
 		      case 5:
 				System.out.println ( "\nSearch Method: Uniform Cost Search (Branch-and-bound)" );

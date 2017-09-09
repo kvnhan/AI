@@ -83,7 +83,7 @@ public class Graph {
 		LinkedList<Node> start = new LinkedList<Node>();
 		Node dummyNode = new Node("Not", 0.0, 0.0, 0);
 		for(Node n: graph.keySet()){
-			if(n.getName().equals("S") && n.visited == 0){
+			if(n.getName().equals("S")){
 				n.setvisted();
 				start.add(n);
 				n.setAdjacentNodes(start);
