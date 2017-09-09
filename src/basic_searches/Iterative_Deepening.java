@@ -15,7 +15,7 @@ import SetUp.Queue;
  * @author jmetzger
  *
  */
-public class IDS {
+public class Iterative_Deepening {
 	LinkedList<String> visited = new LinkedList<String>();
 	LinkedList<String> expanded = new LinkedList<String>();
 	LinkedList<Node> visitedNode = new LinkedList<Node>();
@@ -30,7 +30,7 @@ public class IDS {
 	int limitChange = 0;
 	int limit = 0;
 	int numPath = 1;
-	public IDS(){
+	public Iterative_Deepening(){
 		
 	}
 	

@@ -7,6 +7,6 @@ package basic_searches;
  * @author jmetzger
  *
  */
-public class BS {
+public class Hill_Climbing {
 
 }

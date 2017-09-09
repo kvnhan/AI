@@ -3,7 +3,11 @@
  */
 package SetUp;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
 import java.util.LinkedList;
+import java.util.Scanner;
 
 /**
  * @author jmetzger
@@ -19,6 +23,113 @@ public class Initial {
 	
 	public Initial() {
 		
+	}
+	
+	public void parse(BufferedReader br, FileReader fr, String[] args, Graph g) {
+		try{	
+			String sCurrentLine;
+			String text = args[0];
+			File file = new File(text);
+			String path = file.getAbsolutePath();
+			Node node1, node2;
+			try{
+			fr = new FileReader(path);
+			br = new BufferedReader(fr);
+
+			}catch(Exception e){
+				System.out.println("Sorry");
+			}
+			
+			while ((sCurrentLine = br.readLine()) != null) {
+				
+				//System.out.println(sCurrentLine);
+				
+				String[] token = sCurrentLine.split("\\s+");
+				if(!(token.equals("#####"))){
+					if(token.length == 3){
+						node1 = new Node(token[0], 0.0, Double.parseDouble(token[2]), 0);
+						node2 = new Node(token[1], 0.0, Double.parseDouble(token[2]), 0);
+						node1.pairNode(node2);
+						node1.addEdge(node2, Double.parseDouble(token[2]));
+						node2.addEdge(node1, Double.parseDouble(token[2]));
+						g.createGraph(node1, node2);
+						
+					}else if(token.length == 2){
+						Node oldnode = new Node(token[0], 0.0, 0.0, 0);
+						g.heuristic_dict.put(token[0], Double.parseDouble(token[1]));
+						if(g.NodeExist(oldnode)){
+							g.changeNodeCost(oldnode, Double.parseDouble(token[1]));
+
+						}
+					}
+				}
+			}
+			}
+			catch(Exception e){
+				System.out.println(e.getMessage());
+				System.out.println(e.getCause());
+				System.out.println(e.getLocalizedMessage());
+				System.out.println(e.getClass());
+				System.out.println(e.toString());
+				System.out.println("No file exists");
+				
+			}
+			
+		}
+	
+	public void selection(Graph g) {
+		Scanner in = new Scanner ( System.in );
+	    switch ( in.nextInt() ) {
+	      case 1:
+	        System.out.println ( "\nSearch Method: Depth 1st Search" );
+	        System.out.println("\n===== Queue =====\n");
+	        g.General_Search("DFS");
+	        break;
+	      case 2:
+	        System.out.println ( "\nSearch Method: Breadth 1st Search" );
+	        System.out.println("\n===== Queue =====\n");
+	        g.General_Search("BFS");
+	        break;
+	      case 3:
+		    System.out.println ( "\nSearch Method: Depth-Limited Search" );
+		    System.out.println("\n===== Queue =====\n");
+		    g.General_Search("DLS");
+		    break;
+	      case 4:
+			System.out.println ( "\nSearch Method: Iterative Deepening Search" );
+		    System.out.println("\n===== Queue =====\n");
+		    g.General_Search("IDS");
+		    break;
+	      case 5:
+			System.out.println ( "\nSearch Method: Uniform Cost Search (Branch-and-bound)" );
+		    System.out.println("\n===== Queue =====\n");
+		    g.General_Search("UCS");
+		    break;
+	      case 6:
+			System.out.println ( "\nSearch Method: Greedy Search" );
+		    System.out.println("\n===== Queue =====\n");
+		    g.General_Search("Greedy");
+		    break;
+	      case 7:
+			System.out.println ( "\nSearch Method: A*" );
+		    System.out.println("\n===== Queue =====\n");
+		    g.General_Search("A*");
+		    break;
+	      case 8:
+			System.out.println ( "\nSearch Method: Hill-Climbing Search" );
+		    System.out.println("\n===== Queue =====\n");
+		    g.General_Search("HCS");
+		    break;
+	      case 9:
+			System.out.println ( "\nSearch Method: Beam Search" );
+		    System.out.println("\n===== Queue =====\n");
+		    g.General_Search("BS");
+		    break;
+	      default:
+	        System.err.println ( "Wrong Input" );
+	        return;
+	    }
+
 	}
 
 	public void startTree(Graph graph, Node node) {

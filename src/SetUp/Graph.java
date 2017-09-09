@@ -9,12 +9,27 @@ import java.util.PriorityQueue;
 import java.util.Queue;
 import java.util.Stack;
 
+import basic_searches.A_Star;
+import basic_searches.Breadth_First;
+import basic_searches.Beam;
+import basic_searches.Depth_First;
+import basic_searches.Depth_Limited;
+import basic_searches.Greedy;
+import basic_searches.Uniform_Cost;
+
 public class Graph {
 	HashMap<Node, Node> graph = new HashMap<Node, Node>();
 	LinkedList<Node> visited = new LinkedList<Node>();
 	LinkedList<Edge> edges = new LinkedList<Edge>();
 	LinkedList<Path> pathqueue = new LinkedList<Path>();
 	HashMap<String, Double> heuristic_dict = new HashMap<String, Double>();
+	
+	Greedy greedy = new Greedy();
+	Breadth_First breadth = new Breadth_First();
+	Depth_First depth = new Depth_First();
+	Depth_Limited depthLimited = new Depth_Limited();
+	Uniform_Cost uniform = new Uniform_Cost();
+	A_Star a = new A_Star();
 	
 	Graph(){
 	}
@@ -154,7 +169,7 @@ public class Graph {
 				if (!in_path){
 			   Double newcost = 0.0;
 			   if(!path.p.isEmpty()){
-			   newcost = path.dist + distance(path.p.getFirst(), n);
+			   newcost = path.getDist() + distance(path.p.getFirst(), n);
 			   }
 				p.addAll(path.p);
 				p.addFirst(n);
@@ -190,104 +205,40 @@ public class Graph {
 		return 0.0;
 	}
 
-	public void AddToQueue(LinkedList<Path> new_paths, String method){
+	public void AddToQueue(LinkedList<Path> new_paths, String method){		
 
-		if (method == "BFS"){
-			for (Path n : new_paths) {
-			pathqueue.addLast(n);
-			}
+		switch(method) {
+			case "DFS":
+				depth.depthSearch(pathqueue,new_paths,heuristic_dict);
+				break;
+			case "BFS":
+				breadth.breadthSearch(pathqueue, new_paths, heuristic_dict);
+				break;
+			case "DLS":
+				depthLimited.depthLimitedSearch(pathqueue,new_paths,heuristic_dict);
+				break;
+			case "IDS":
+				//TODO
+				break;
+			case "UCS":
+				uniform.uniformSearch(pathqueue,new_paths,heuristic_dict);
+				break;
+			case "Greedy":
+				greedy.greedySearch(pathqueue, new_paths, heuristic_dict);
+				break;
+			case "A*":
+				a.aSearch(pathqueue, new_paths, heuristic_dict);
+				break;
+			case "HCS":
+				//TODO
+				break;
+			case "BS":
+				//TODO
+				break;
+			default:
+		        System.err.println ( "Wrong Input" );
+		        return;
 		}
-		
-		if (method == "DFS"){
-			Stack<Path> pathstack = new Stack<Path>();
-		
-			for (Path n : new_paths) {
-			pathstack.push(n);
-			}
-			
-			while(!pathstack.isEmpty()){
-				Path curr = pathstack.pop();
-				pathqueue.addFirst(curr);
-			}
-		}
-		
-		if (method == "DLS"){
-
-			Stack<Path> pathstack = new Stack<Path>();
-			
-			for (Path n : new_paths) {
-			pathstack.push(n);
-			}
-			
-			while(!pathstack.isEmpty()){
-				Path curr = pathstack.pop();
-				if(curr.p.size() <= 3){
-				pathqueue.addFirst(curr);
-				}
-			}
-		}
-		
-		if (method == "UCS"){
-			for (Path n : new_paths) {
-			pathqueue.addLast(n);
-			}
-			Collections.sort(pathqueue, new Comparator<Path>(){
-				   @Override
-				   public int compare(Path o1, Path o2){
-				        if(o1.dist.compareTo(o2.dist) < 0){
-				           return -1; 
-				        }
-				        if(o1.dist.compareTo(o2.dist) > 0){
-				           return 1; 
-				        }
-				        return 0;
-				   }
-				}); 
-			
-		}
-		
-		if (method == "Greedy"){
-			for (Path n : new_paths) {
-				pathqueue.addLast(n);
-				}
-			for (Path p: pathqueue){
-
-				p.dist = heuristic_dict.get(p.p.getFirst().name);
-			}
-			Collections.sort(pathqueue, new Comparator<Path>(){
-				   @Override
-				   public int compare(Path o1, Path o2){
-				        if(o1.dist.compareTo(o2.dist) < 0){
-				           return -1; 
-				        }
-				        if(o1.dist.compareTo(o2.dist) > 0){
-				           return 1; 
-				        }
-				        return 0;
-				   }
-				}); 
-		}
-		
-		if (method == "A*"){
-			for (Path n : new_paths) {
-				n.dist += heuristic_dict.get(n.p.getFirst().name);
-				pathqueue.addLast(n);
-				}
-				Collections.sort(pathqueue, new Comparator<Path>(){
-					   @Override
-					   public int compare(Path o1, Path o2){
-					        if(o1.dist.compareTo(o2.dist) < 0){
-					           return -1; 
-					        }
-					        if(o1.dist.compareTo(o2.dist) > 0){
-					           return 1; 
-					        }
-					        return 0;
-					   }
-					}); 
-				
-			}
-		
 	}
 
 	public void printQueue(Path list){
@@ -312,7 +263,7 @@ public class Graph {
 		System.out.print("[");
 		
 		for(Path nodes: list){
-			System.out.print(nodes.dist);
+			System.out.print(nodes.getDist());
 			for(Node n: nodes.p){
 				
 				if(nodes.p.size() == 1){

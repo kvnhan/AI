@@ -10,7 +10,7 @@ import org.junit.Test;
 import org.junit.rules.ExternalResource;
 
 import SetUp.Node;
-import basic_searches.DFS;
+import basic_searches.Depth_First;
 
 /**
  * @author jmetzger and kvnhan
@@ -21,7 +21,7 @@ import basic_searches.DFS;
 public class testAlgorithms {
 	
 	Node startState = new Node("S", 0.0, 0.0, 0);
-    DFS dfs = new DFS();
+    Depth_First dfs = new Depth_First();
 
     @Test
     public void test() throws Exception
