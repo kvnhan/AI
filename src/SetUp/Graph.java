@@ -243,8 +243,7 @@ public class Graph {
 
 	public void printQueue(Path list){
 
-		int size = list.
-				p.size();
+		int size = list.p.size();
 		int count = 0;
 		for(Node n: list.p){
 			count++;
