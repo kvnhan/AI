@@ -13,7 +13,12 @@ import java.util.Scanner;
  * @author jmetzger
  *
  */
+
+
 public class Initial {
+	
+	private static final String FILENAME = "/Users/jmetzger/Desktop/graph.txt";
+
 
 	private LinkedList<String> visited = new LinkedList<String>();
 	private LinkedList<LinkedList<Node>> queue = new LinkedList<LinkedList<Node>>();
@@ -28,12 +33,12 @@ public class Initial {
 	public void parse(BufferedReader br, FileReader fr, String[] args, Graph g) {
 		try {
 			String sCurrentLine;
-			String text = args[0];
-			File file = new File(text);
-			String path = file.getAbsolutePath();
+			//String text = args[0];
+			//File file = new File(text);
+			//String path = file.getAbsolutePath();
 			Node node1, node2;
 			try {
-				fr = new FileReader(path);
+				fr = new FileReader(FILENAME);
 				br = new BufferedReader(fr);
 
 			} catch (Exception e) {

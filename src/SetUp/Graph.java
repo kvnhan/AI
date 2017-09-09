@@ -11,6 +11,7 @@ import basic_searches.Breadth_First;
 import basic_searches.Depth_First;
 import basic_searches.Depth_Limited;
 import basic_searches.Greedy;
+import basic_searches.Iterative_Deepening;
 import basic_searches.Uniform_Cost;
 
 public class Graph {
@@ -19,12 +20,14 @@ public class Graph {
 	LinkedList<Edge> edges = new LinkedList<Edge>();
 	LinkedList<Path> pathqueue = new LinkedList<Path>();
 	HashMap<String, Double> heuristic_dict = new HashMap<String, Double>();
-	
+	LinkedList<Node> list = new LinkedList<Node>();
+	boolean found = true;
 	Greedy greedy = new Greedy();
 	Breadth_First breadth = new Breadth_First();
 	Depth_First depth = new Depth_First();
 	Depth_Limited depthLimited = new Depth_Limited();
 	Uniform_Cost uniform = new Uniform_Cost();
+	Iterative_Deepening iterative = new Iterative_Deepening();
 	A_Star a = new A_Star();
 	
 	Graph(){
@@ -124,8 +127,12 @@ public class Graph {
 		nodepath.add(start_node);
 		Path path = new Path(nodepath, 0.0);
 		pathqueue.add(path);
+		found = false;
 		while(true){
 			printQueue2(pathqueue);
+			if(found) {
+				return null;
+			}
 			if (pathqueue.isEmpty()){
 				System.out.print("Fail");
 				return null;
@@ -176,12 +183,14 @@ public class Graph {
 				}
 			}		
 			
-			AddToQueue(new_paths, method);			
-			path = pathqueue.getFirst();
+			AddToQueue(new_paths, method);	
+			if(!pathqueue.isEmpty()) {
+				path = pathqueue.getFirst();
+			}
 			try {
 				Thread.sleep(1);
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
+				System.out.println("Failed");
 				e.printStackTrace();
 			}
 		}
@@ -202,7 +211,7 @@ public class Graph {
 	}
 
 	public void AddToQueue(LinkedList<Path> new_paths, String method){		
-
+		Node node = new Node("S", 0.0, 0.0, 0);
 		switch(method) {
 			case "DFS":
 				depth.depthSearch(pathqueue,new_paths,heuristic_dict);
@@ -214,7 +223,7 @@ public class Graph {
 				depthLimited.depthLimitedSearch(pathqueue,new_paths,heuristic_dict);
 				break;
 			case "IDS":
-				//TODO
+				found = iterative.ids(this,node,node,0, list);
 				break;
 			case "UCS":
 				uniform.uniformSearch(pathqueue,new_paths,heuristic_dict);

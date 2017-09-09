@@ -34,6 +34,7 @@ public class Iterative_Deepening {
 		
 	}
 	
+	
 	public boolean ids(Graph graph, Node node, Node from, int depth, LinkedList<Node> list){
 		LinkedList<Node> startQueue = new LinkedList<Node>();
 		LinkedList<Node> start = new LinkedList<Node>();

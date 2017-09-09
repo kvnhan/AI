@@ -11,8 +11,6 @@ import java.io.FileReader;
 
 public class Main {
 
-	//private static final String FILENAME = "C:/Users/Kien Nhan/Downloads/graph.txt";
-
 	public static void main(String[] args) {
 		
 	    BufferedReader br = null;  

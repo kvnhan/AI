@@ -31,9 +31,8 @@ public class Depth_Limited {
 		for (Path n : new_paths) {
 			pathstack.push(n);
 		}
-		
 		while(!pathstack.isEmpty()){
-			Path curr = pathstack.pop();
+			Path curr = pathstack.pop();			
 			if(curr.getP().size() <= 3){
 				pathqueue.addFirst(curr);
 			}
