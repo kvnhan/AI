@@ -36,12 +36,12 @@ public class Beam {
 		
 		if(path.size() == 0){
 			if(node.getName().equals("G")){
-				System.out.println("\nExpand " + node.getName());
+				System.out.print("      " + node.getName());
 				printQueue2(queue);
 				System.out.println("\nGoal Reached!");
 				return true;
 			}
-			System.out.println("\nExpand " + node.getName());
+			System.out.print("      " + node.getName());
 			printQueue2(queue);
 			graph.setVisited(node);
 			queue = pop();
@@ -81,7 +81,7 @@ public class Beam {
 		best = sortH(level + 1, graph);
 		best = bestNodes(level + 1);
 		best = sortPath(best, node);
-		System.out.println("\nExpand " + node.getName());
+		System.out.print("      " + node.getName());
 		printQueue2(queue);
 		
 		
@@ -236,7 +236,7 @@ public class Beam {
 	}
 	
 	public void printQueue2(LinkedList<LinkedList<Node>> queue){
-		System.out.print("[");
+		System.out.print("                 [");
 		for(LinkedList<Node> nodes: queue){
 			System.out.print(" <");
 			printQueue(nodes);
