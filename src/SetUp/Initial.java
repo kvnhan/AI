@@ -18,8 +18,8 @@ import java.util.Scanner;
 public class Initial {
 	
 	//private static final String FILENAME = "/Users/jmetzger/Desktop/graph.txt";
-	//private static final String FILENAME = "C:/Users/Kien/Downloads/graph.txt";
-	private static final String FILENAME = "/Users/joe/Desktop/graph.txt";
+	private static final String FILENAME = "C:/Users/Kien Nhan/Downloads/graph.txt";
+	//private static final String FILENAME = "/Users/joe/Desktop/graph.txt";
 
 	private LinkedList<String> visited = new LinkedList<String>();
 	private LinkedList<LinkedList<Node>> queue = new LinkedList<LinkedList<Node>>();

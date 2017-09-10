@@ -135,10 +135,13 @@ public class Graph {
 		Path path = new Path(nodepath, 0.0);
 		pathqueue.add(path);
 		found = false;
+		System.out.println("      Expanded   " + "        Queue");
 		while(true){
-			printQueue2(pathqueue);
 			if(found) {
 				return null;
+			}
+			if(!method.equals("BS") && !method.equals("IDS")){
+				printQueue2(pathqueue);
 			}
 			if (pathqueue.isEmpty()){
 				System.out.print("Fail");
@@ -271,20 +274,20 @@ public class Graph {
 	
 	public void printQueue2(Queue<Path> list){
 
-		System.out.print("[");
+		System.out.print("                      [");
 		
 		for(Path nodes: list){
 			System.out.print(nodes.getDist());
 			for(Node n: nodes.p){
 				
 				if(nodes.p.size() == 1){
-					System.out.println("<" + n.getName() + ">]");
+					System.out.println(" <" + n.getName() + "> ]");
 					return;
 				}
 			}
-			System.out.print("<");
+			System.out.print(" <");
 			printQueue(nodes);
-			System.out.print(">");
+			System.out.print("> ");
 		}
 		System.out.print("]");
 		System.out.println();

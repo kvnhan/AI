@@ -221,14 +221,7 @@ public class Beam {
 		return false;
 	}
 	
-	// Use to order queue for BFS
-		public LinkedList<LinkedList<Node>> fixBFSQueue(LinkedList<LinkedList<Node>> dummyqueue){
-			for(LinkedList<Node> node: dummyqueue){
-				queue.addLast(node);
-			}
-			return queue;
-		}
-		
+	
 	public void printQueue(LinkedList<Node> list){
 		int size = list.size();
 		int count = 0;
@@ -253,24 +246,6 @@ public class Beam {
 		System.out.println();
 	}
 	
-	// Use to order the queue for DFS 
-		public LinkedList<LinkedList<Node>> fixDFSQueue(Node child, LinkedList<LinkedList<Node>> dummyqueue){
-			LinkedList<LinkedList<Node>> queue2 = new LinkedList<LinkedList<Node>>();
-			LinkedList<Node> alist = new LinkedList<Node>();
-			alist = queue.getFirst();
-			queue = pop();
-			for(LinkedList<Node> n: dummyqueue){
-				queue2.addLast(n);
-			}
-			for(LinkedList<Node> node: queue){
-				if(!child.getName().equals("S")){
-					queue2.addLast(node);
-				}else{
-					queue2.addFirst(node);
-				}
-			}
-			queue2.addFirst(alist);
-			return queue2;
-		}
+	
 
 }

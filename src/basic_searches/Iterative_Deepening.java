@@ -45,19 +45,22 @@ public class Iterative_Deepening {
 		startState = graph.getS();
 		//int size = list.size();
 	
-		System.out.println("L=" + depth);
+		if(limitChange == 1 && depth >= 1){
+			limitChange = 0;
+			System.out.println("L=" + depth);
+		}
 			
 		path = graph.getChildrenOf(node);
 		path = removePath(path, from);	
 		// Dead End
 		if(path.size() == 0){
 			if(node.getName().equals("G")){
-				System.out.println("\nExpand " + node.getName());
+				System.out.print("      " + node.getName());
 				printQueue2(queue);
 				System.out.println("\nGoal Reached!");
 				return true;
 			}
-			System.out.println("\nExpand " + node.getName());
+			System.out.print("      " + node.getName());
 			printQueue2(queue);
 			graph.setVisited(node);
 			queue = pop();
@@ -74,18 +77,24 @@ public class Iterative_Deepening {
 		}
 		
 		if(node.getName().equals("S") && depth == 0){
+			System.out.println("L=" + depth);
+			System.out.print("      " + node.getName());
 			path = graph.getChildrenOf(startState);
 			startQueue.add(startState);
 			queue.add(startQueue);
 			storage.add(node);
 			expanded.add(node.getName());
 			level.put(startQueue, 0);
-			System.out.println("Expand " + node.getName());
 			printQueue2(queue);
+			limitChange = 1;
 			ids(graph, node, node, 1, startQueue);
 			return true;
 		}
-		
+		 if(depth == 1 && node.getName().equals("S")){
+			 System.out.print("      " + node.getName());
+			printQueue2(queue);
+
+		 }
 		if(node.getName().equals("S") && depth > 1){
 			startQueue.add(node);
 			queue.add(startQueue);
@@ -109,18 +118,14 @@ public class Iterative_Deepening {
 			}
 			
 			if(!node.getName().equals("S")){
-				System.out.println("\nExpand " + node.getName());
+				System.out.print("      " + node.getName());
 				printQueue2(queue);
 				if(list.size()- 1 != depth){
 					queue = fixDFSQueue(node, dummyqueue);
-					printQueue2(queue);
 				}
 				map.put(node.getName(), dqueue);
 			}else{
-				System.out.println("\nExpand " + node.getName());
-				printQueue2(queue);
 				queue = fixDFSQueue(node, dummyqueue);
-				printQueue2(queue);
 			}
 			
 			
@@ -140,6 +145,7 @@ public class Iterative_Deepening {
 				queue.pop();
 				if(queue.size() == 0){
 					if(getLevel(node) == depth){
+						limitChange = 1;
 						ids(graph, storage.getFirst(), storage.getFirst(), depth + 1, storage);
 						return true;
 					}else{
@@ -232,14 +238,7 @@ public class Iterative_Deepening {
 		return false;
 	}
 	
-	// Use to order queue for BFS
-		public LinkedList<LinkedList<Node>> fixBFSQueue(LinkedList<LinkedList<Node>> dummyqueue){
-			for(LinkedList<Node> node: dummyqueue){
-				queue.addLast(node);
-			}
-			return queue;
-		}
-		
+	
 	public void printQueue(LinkedList<Node> list){
 		int size = list.size();
 		int count = 0;
@@ -254,14 +253,13 @@ public class Iterative_Deepening {
 	}
 	
 	public void printQueue2(LinkedList<LinkedList<Node>> queue){
-		System.out.print("[");
+		System.out.print("               [");
 		for(LinkedList<Node> nodes: queue){
 			System.out.print(" <");
 			printQueue(nodes);
 			System.out.print("> ");	
 		}
-		System.out.print("]");
-		System.out.println();
+		System.out.print("]\n");
 	}
 	
 	// Use to order the queue for DFS 
