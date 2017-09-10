@@ -7,6 +7,7 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 import basic_searches.A_Star;
+import basic_searches.Beam;
 import basic_searches.Breadth_First;
 import basic_searches.Depth_First;
 import basic_searches.Depth_Limited;
@@ -29,10 +30,14 @@ public class Graph {
 	Uniform_Cost uniform = new Uniform_Cost();
 	Iterative_Deepening iterative = new Iterative_Deepening();
 	A_Star a = new A_Star();
-	
+	Beam beam = new Beam();
 	Graph(){
 	}
 
+	
+	public double getHeuristics(Node n){
+		return heuristic_dict.get(n.getName());
+	}
 	// Method to great a graph, sort of
 	void createGraph(Node node1, Node node2){
 		graph.put(node1, node2);
@@ -196,7 +201,7 @@ public class Graph {
 		}
 	}
 	
-	private Double distance(Node first, Node n) {
+	public Double distance(Node first, Node n) {
 		 
 		for(Edge e : n.edges){
 //			 System.out.println("From: " + n.name);
@@ -238,7 +243,7 @@ public class Graph {
 				//TODO
 				break;
 			case "BS":
-				//TODO
+				found = beam.bs(this, node, node, list);
 				break;
 			default:
 		        System.err.println ( "Wrong Input" );
