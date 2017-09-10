@@ -140,8 +140,9 @@ public class Graph {
 			if(found) {
 				return null;
 			}
-			System.out.print(pathqueue.getFirst().getP().getFirst().getName());
+			
 			if(!method.equals("BS") && !method.equals("IDS")){
+				System.out.print(pathqueue.getFirst().getP().getFirst().getName());
 				printQueue2(pathqueue);
 			}
 			if (pathqueue.isEmpty()){
