@@ -4,28 +4,27 @@
 package SetUp;
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileReader;
 import java.util.LinkedList;
 import java.util.Scanner;
 
+import general_search.general_search;
+
 /**
- * @author jmetzger
+ * @author jmetzger kvnhan jwilder
  *
  */
 
 
 public class Initial {
-	
-	//private static final String FILENAME = "/Users/jmetzger/Desktop/graph.txt";
-	//private static final String FILENAME = "C:/Users/Kien/Downloads/graph.txt";
-	private static final String FILENAME = "/Users/joe/Desktop/graph.txt";
 
 	private LinkedList<String> visited = new LinkedList<String>();
 	private LinkedList<LinkedList<Node>> queue = new LinkedList<LinkedList<Node>>();
 	private LinkedList<Node> visitedNode = new LinkedList<Node>();
 	private Queue queueClass = new Queue();
 	private LinkedList<String> DeadEnd = new LinkedList<String>();
+	private Filename filename = new Filename();
+	
 
 	public Initial() {
 
@@ -39,7 +38,7 @@ public class Initial {
 			//String path = file.getAbsolutePath();
 			Node node1, node2;
 			try {
-				fr = new FileReader(FILENAME);
+				fr = new FileReader(filename.getName());
 				br = new BufferedReader(fr);
 
 			} catch (Exception e) {
@@ -90,6 +89,7 @@ public class Initial {
 			System.out.println("\nSearch Method: Depth 1st Search");
 			System.out.println("\n===== Queue =====\n");
 			g.General_Search("DFS");
+			//gs.search(g, "DFS");
 			break;
 		case 2:
 			System.out.println("\nSearch Method: Breadth 1st Search");

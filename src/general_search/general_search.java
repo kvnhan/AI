@@ -26,8 +26,8 @@ import basic_searches.Uniform_Cost;
  */
 public class general_search {
 	
-	LinkedList<Node> visited;
-	LinkedList<Path> pathqueue;
+	LinkedList<Node> visited = new LinkedList<Node>();
+	LinkedList<Path> pathqueue = new LinkedList<Path>();
 	boolean found = true;
 	
 	public general_search() {

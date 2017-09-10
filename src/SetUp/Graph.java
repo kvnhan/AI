@@ -33,6 +33,7 @@ public class Graph {
 	Hill_Climbing hillclimb = new Hill_Climbing();
 	A_Star a = new A_Star();
 	Beam beam = new Beam();
+	
 	Graph(){
 	}
 
