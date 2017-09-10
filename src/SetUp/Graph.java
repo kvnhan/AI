@@ -12,6 +12,7 @@ import basic_searches.Breadth_First;
 import basic_searches.Depth_First;
 import basic_searches.Depth_Limited;
 import basic_searches.Greedy;
+import basic_searches.Hill_Climbing;
 import basic_searches.Iterative_Deepening;
 import basic_searches.Uniform_Cost;
 
@@ -29,6 +30,7 @@ public class Graph {
 	Depth_Limited depthLimited = new Depth_Limited();
 	Uniform_Cost uniform = new Uniform_Cost();
 	Iterative_Deepening iterative = new Iterative_Deepening();
+	Hill_Climbing hillclimb = new Hill_Climbing();
 	A_Star a = new A_Star();
 	Beam beam = new Beam();
 	Graph(){
@@ -240,7 +242,7 @@ public class Graph {
 				a.aSearch(pathqueue, new_paths, heuristic_dict);
 				break;
 			case "HCS":
-				//TODO
+				hillclimb.hillClimbingSearch(pathqueue, new_paths, heuristic_dict);
 				break;
 			case "BS":
 				found = beam.bs(this, node, node, list);

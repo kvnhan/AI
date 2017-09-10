@@ -26,7 +26,12 @@ public class A_Star {
 	
 	public void aSearch(LinkedList<Path> pathqueue, LinkedList<Path> new_paths, HashMap<String, Double> heuristic_dict) {
 		for (Path n : new_paths) {
-			n.setDist(n.getDist() + heuristic_dict.get(n.getP().getFirst().getName()));
+			if(n.getP().size() > 2){
+			n.setDist(n.getDist() + heuristic_dict.get(n.getP().getFirst().getName()) - heuristic_dict.get(n.getP().get(1).getName()));
+			}
+			else{
+				n.setDist(n.getDist() + heuristic_dict.get(n.getP().getFirst().getName()));
+			}
 			pathqueue.addLast(n);
 			}
 			Collections.sort(pathqueue, new Comparator<Path>(){
