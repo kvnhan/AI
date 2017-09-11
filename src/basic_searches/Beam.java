@@ -31,16 +31,17 @@ public class Beam {
 		LinkedList<LinkedList<Node>> dummyqueue = new LinkedList<LinkedList<Node>>();
 		LinkedList<Node> path = new LinkedList<Node>();
 		
+		if(node.getName().equals("G")){
+			System.out.print("      " + node.getName());
+			printQueue2(graph, queue);
+			System.out.println("\nGoal Reached!");
+			return true;
+		}
+		
 		path = graph.getChildrenOf(node);
 		path = removePath(path, from);
 		
 		if(path.size() == 0){
-			if(node.getName().equals("G")){
-				System.out.print("      " + node.getName());
-				printQueue2(graph, queue);
-				System.out.println("\nGoal Reached!");
-				return true;
-			}
 			System.out.print("      " + node.getName());
 			printQueue2(graph, queue);
 			graph.setVisited(node);
@@ -77,7 +78,6 @@ public class Beam {
 				heu_Map.put(graph.getHeuristics(child), child.getAdjacentNodes());
 				}
 			}
-		
 		best = sortH(level + 1, graph);
 		best = bestNodes(level + 1);
 		best = sortPath(best, node);
@@ -89,13 +89,9 @@ public class Beam {
 		Node f = null;
 		LinkedList<Node> temp = new LinkedList<Node>();
 		if(!queue.getFirst().getFirst().getName().equals("G")){
-			if(queue.size() > 2){
-				queue = new LinkedList<LinkedList<Node>>();
-				queue = getTwo(graph, best);
-			}else{
-				queue = getTwo(graph, best);
-				queue.pop();
-			}			
+			
+			queue = getTwo(graph, best);
+			queue.pop();
 			Node newnode2 = queue.getFirst().getFirst();
 			Node fromNode2 = queue.getFirst().get(1);	
 			temp = queue.getFirst();
@@ -164,15 +160,35 @@ public class Beam {
 		return path;
 	}
 	
+	
+	public LinkedList<LinkedList<Node>> sortQueue(LinkedList<LinkedList<Node>> q){
+		LinkedList<Node> node =  new LinkedList<Node>();
+		LinkedList<LinkedList<Node>> newq = new LinkedList<LinkedList<Node>>();
+		int level = q.getFirst().size() - 1;
+		for(LinkedList<Node> n: queue){
+			if(n.size() - 1 != level){
+				newq.addLast(n);
+			}
+		}
+		
+		return newq;
+	}
 	public LinkedList<LinkedList<Node>> getTwo(Graph g, LinkedList<Node> list){
 		LinkedList<Node> l = new LinkedList<Node>();
+		LinkedList<LinkedList<Node>> newq = new LinkedList<LinkedList<Node>>();
+		LinkedList<LinkedList<Node>> q = new LinkedList<LinkedList<Node>>();
 		double value;
 		for(Node n: list){
 			value = g.getHeuristics(n);
 			l = heu_Map.get(value);
-			queue.addLast(l);
+			newq.addLast(l);
 		}
-		return queue;
+		
+		q = sortQueue(newq);
+		for(LinkedList<Node> node: newq){
+			q.addLast(node);
+		}
+		return q;
 	}
 	
 	public LinkedList<LinkedList<Node>> pop(){

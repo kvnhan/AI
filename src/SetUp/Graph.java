@@ -137,17 +137,19 @@ public class Graph {
 		found = false;
 		System.out.println("      Expanded   " + "        Queue");
 		while(true){
+			
 			if(found) {
+				return null;
+			}
+			
+			if (pathqueue.isEmpty()){
+				System.out.print("Fail");
 				return null;
 			}
 			
 			if(!method.equals("BS") && !method.equals("IDS")){
 				System.out.print(pathqueue.getFirst().getP().getFirst().getName());
 				printQueue2(pathqueue);
-			}
-			if (pathqueue.isEmpty()){
-				System.out.print("Fail");
-				return null;
 			}
 			
 			Path curr_path = pathqueue.remove();
