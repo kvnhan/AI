@@ -143,7 +143,7 @@ public class Graph {
 		Path path = new Path(nodepath, 0.0);
 		pathqueue.add(path);
 		found = false;
-		System.out.println("Expanded\t\t" + "Queue");
+		System.out.println("Expanded\t" + "Queue");
 		while(true){
 			
 			if(found) {
