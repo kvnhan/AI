@@ -1,5 +1,7 @@
 package SetUp;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -15,6 +17,11 @@ import basic_searches.Greedy;
 import basic_searches.Hill_Climbing;
 import basic_searches.Iterative_Deepening;
 import basic_searches.Uniform_Cost;
+
+/**
+ * Graph.java
+ * @author jmetzger kvnhan jwilder
+ */
 
 public class Graph {
 	HashMap<Node, Node> graph = new HashMap<Node, Node>();
@@ -287,9 +294,11 @@ public class Graph {
 	public void printQueue2(Queue<Path> list){
 
 		System.out.print("\t\t[");
-		
+		double cost = 0.0;
 		for(Path nodes: list){
-			System.out.print(nodes.getDist());
+			cost = nodes.getDist();
+			BigDecimal bd = new BigDecimal(cost);
+			System.out.print(bd.setScale(1, RoundingMode.HALF_UP).setScale(1));
 			for(Node n: nodes.p){
 				
 				if(nodes.p.size() == 1){

@@ -1,6 +1,10 @@
 package SetUp;
-
 import java.util.LinkedList;
+
+/**
+ * Path.java
+ * @author jmetzger kvnhan jwilder
+ */
 
 public class Path {
 	LinkedList<Node> p;

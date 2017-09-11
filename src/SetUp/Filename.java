@@ -1,28 +1,40 @@
-/**
- * 
- */
 package SetUp;
+import java.io.File;
 
 /**
- * @author jrmetzger
- *
+ * Filename.java
+ * @author jmetzger kvnhan jwilder
  */
+
 public class Filename {
 	
-	/**
-	 * Put path to file here
-	 */
-	private static final String FILENAME = "/Users/jmetzger/Desktop/graph.txt";
-	//private static final String FILENAME = "C:/Users/Jon/Desktop/graph.txt";
-	//private static final String FILENAME = "C:/Users/Kien/Downloads/graph.txt";
-	//private static final String FILENAME = "/Users/joe/Desktop/graph.txt";
-		
-	Filename(){
-		
-	}
+	private String FILENAME = null;
 	
-	public String getName() {
-		String file = FILENAME;
-		return file;
+
+	Filename(){}
+	
+	public String getName(String[] args) {
+		
+		/**
+		 * Put path to file here
+		 */
+		//FILENAME = "src/graph.txt";
+		//FILENAME = "src/second_graph.txt";
+		//FILENAME = "C:/Users/Jon/Desktop/graph.txt";
+		//FILENAME = "C:/Users/Kien/Downloads/graph.txt";
+		//FILENAME = "/Users/joe/Desktop/graph.txt";
+			
+
+		String filename = FILENAME;
+		
+		if (filename == null) {
+			String text = args[0];
+			File file = new File(text);
+			String path = file.getAbsolutePath();
+			return path;
+		}
+		return filename;
+		
+
 	}
 }

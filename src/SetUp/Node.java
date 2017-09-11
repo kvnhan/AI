@@ -2,6 +2,11 @@ package SetUp;
 import java.util.LinkedList;
 import java.util.HashMap;
 
+/**
+ * Node.java
+ * @author jmetzger kvnhan jwilder
+ */
+
 public class Node implements Comparable<Node>{
 	String name;
 	double cost, distance;

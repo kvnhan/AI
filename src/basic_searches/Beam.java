@@ -1,8 +1,4 @@
-/**
- * 
- */
 package basic_searches;
-
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -10,12 +6,12 @@ import java.util.LinkedList;
 
 import SetUp.Graph;
 import SetUp.Node;
-import SetUp.Path;
 
 /**
- * @author jmetzger
- *
+ * Beam.java
+ * @author jmetzger kvnhan jwilder
  */
+
 public class Beam {
 	LinkedList<LinkedList<Node>> queue = new LinkedList<LinkedList<Node>>();
 	HashMap<Integer, LinkedList<Node>> map = new HashMap<Integer, LinkedList<Node>>();
@@ -82,10 +78,7 @@ public class Beam {
 		best = sortPath(best, node);
 		System.out.print(node.getName());
 		printQueue2(graph, queue);
-		
-		
-		Node n = null;
-		Node f = null;
+	
 		LinkedList<Node> temp = new LinkedList<Node>();
 		if(!queue.getFirst().getFirst().getName().equals("G")){
 			
@@ -146,7 +139,7 @@ public class Beam {
 		LinkedList<Node> path = new LinkedList<Node>();
 		for(Integer level: map.keySet()){
 			if(level == l){
-				for(int i = 0; i < map.get(l).size(); i++){
+				for(int i = 0; i < map.get(l).size();){
 					path.addLast(map.get(l).get(i));
 					if(map.get(l).size() > 1){
 						path.addLast(map.get(l).get(i + 1));
@@ -161,7 +154,6 @@ public class Beam {
 	
 	
 	public LinkedList<LinkedList<Node>> sortQueue(LinkedList<LinkedList<Node>> q){
-		LinkedList<Node> node =  new LinkedList<Node>();
 		LinkedList<LinkedList<Node>> newq = new LinkedList<LinkedList<Node>>();
 		int level = q.getFirst().size() - 1;
 		for(LinkedList<Node> n: queue){

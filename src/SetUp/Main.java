@@ -2,13 +2,10 @@ package SetUp;
 import java.io.BufferedReader;
 import java.io.FileReader;
 
-import general_search.general_search;
-
 /**
- * main.java
+ * Main.java
  * @author jmetzger kvnhan jwilder
  */
-
 
 public class Main {
 
@@ -16,11 +13,8 @@ public class Main {
 		
 	    BufferedReader br = null;  
 		FileReader fr = null;
-		//Node startState = new Node("S", 0.0, 0.0, 0);
 		Graph g = new Graph();
-		//LinkedList<Node> startQueue = new LinkedList<Node>();
 		Initial i = new Initial();
-		//general_search gs = new general_search();
 
 		System.out.println("\n===== Project 1 =====");
 		System.out.println("\nPlease Select the Search Algorithm below you wish to execute:");
@@ -32,6 +26,4 @@ public class Main {
 		
 	    System.out.println("\n===== EOF =====\n\n");
 	}
-
-
 }

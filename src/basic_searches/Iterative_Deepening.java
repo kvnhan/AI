@@ -1,8 +1,4 @@
-/**
- * 
- */
 package basic_searches;
-
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -12,9 +8,10 @@ import SetUp.Node;
 import SetUp.Queue;
 
 /**
- * @author jmetzger
- *
+ * Iterative_Deepening.java
+ * @author jmetzger kvnhan jwilder
  */
+
 public class Iterative_Deepening {
 	LinkedList<String> visited = new LinkedList<String>();
 	LinkedList<String> expanded = new LinkedList<String>();

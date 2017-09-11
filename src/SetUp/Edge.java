@@ -1,5 +1,10 @@
 package SetUp;
 
+/**
+ * Edge.java
+ * @author jmetzger kvnhan jwilder
+ */
+
 public class Edge {
 	Node to;
 	Double dist;

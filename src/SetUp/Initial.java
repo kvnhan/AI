@@ -1,10 +1,5 @@
-/**
- * 
- */
 package SetUp;
-
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileReader;
 import java.util.LinkedList;
 import java.util.Scanner;
@@ -12,17 +7,13 @@ import java.util.Scanner;
 import basic_searches.Print_All;
 
 /**
- * @author jmetzger
- *
+ * Initial.java
+ * @author jmetzger kvnhan jwilder
  */
 
 
 public class Initial {
 	
-	//private static final String FILENAME = "/Users/jmetzger/Desktop/graph.txt";
-	//private static final String FILENAME = "C:/Users/Kien Nhan/Downloads/graph.txt";
-	//private static final String FILENAME = "/Users/joe/Desktop/graph.txt";
-
 	private LinkedList<String> visited = new LinkedList<String>();
 	private LinkedList<LinkedList<Node>> queue = new LinkedList<LinkedList<Node>>();
 	private LinkedList<Node> visitedNode = new LinkedList<Node>();
@@ -38,16 +29,13 @@ public class Initial {
 	public void parse(BufferedReader br, FileReader fr, String[] args, Graph g) {
 		try {
 			String sCurrentLine;
-			//String text = args[0];
-			//File file = new File(text);
-			//String path = file.getAbsolutePath();
 			Node node1, node2;
 			try {
-				fr = new FileReader(f.getName());
+				fr = new FileReader(f.getName(args));
 				br = new BufferedReader(fr);
 
 			} catch (Exception e) {
-				System.out.println("Go to Filename.java and input your path to your text file.\n");
+				System.out.println("Go to Filename.java and input the path to your text file.\n");
 			}
 
 			while ((sCurrentLine = br.readLine()) != null) {
@@ -92,24 +80,7 @@ public class Initial {
 		switch (in.nextInt()) {
 		case 0:
 			System.out.println("\nPrinting ALL SEARCH METHODS");
-			System.out.println("\nSearch Method: Depth 1st Search");
-			g.General_Search("DFS");
-			System.out.println("\nSearch Method: Breadth 1st Search");
-			g.General_Search("BFS");
-			System.out.println("\nSearch Method: Depth-Limited Search");
-			g.General_Search("DLS");
-			System.out.println("\nSearch Method: Iterative Deepening Search");
-			g.General_Search("IDS");
-			System.out.println("\nSearch Method: Uniform Cost Search (Branch-and-bound)");
-			g.General_Search("UCS");
-			System.out.println("\nSearch Method: Greedy Search");
-			g.General_Search("Greedy");
-			System.out.println("\nSearch Method: A*");
-			g.General_Search("A*");
-			System.out.println("\nSearch Method: Hill-Climbing Search");
-			g.General_Search("HCS");
-			System.out.println("\nSearch Method: Beam Search");
-			g.General_Search("BS");
+			p.print(g);
 			break;
 		case 1:
 			System.out.println("\nSearch Method: Depth 1st Search");
@@ -120,7 +91,7 @@ public class Initial {
 			g.General_Search("BFS");
 			break;
 		case 3:
-			System.out.println("\nSearch Method: Depth-Limited Search");
+			System.out.println("\nSearch Method: Depth-Limited Search (Limit = 2)");
 			g.General_Search("DLS");
 			break;
 		case 4:
@@ -140,11 +111,11 @@ public class Initial {
 			g.General_Search("A*");
 			break;
 		case 8:
-			System.out.println("\nSearch Method: Hill-Climbing Search");
+			System.out.println("\nSearch Method: Hill-Climbing Search (no backtracking)");
 			g.General_Search("HCS");
 			break;
 		case 9:
-			System.out.println("\nSearch Method: Beam Search");
+			System.out.println("\nSearch Method: Beam Search (w = 2)");
 			g.General_Search("BS");
 			break;
 		default:

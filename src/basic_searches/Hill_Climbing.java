@@ -1,8 +1,4 @@
-/**
- * 
- */
 package basic_searches;
-
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -11,9 +7,10 @@ import java.util.LinkedList;
 import SetUp.Path;
 
 /**
- * @author jmetzger
- *
+ * Hill_Climbing.java
+ * @author jmetzger kvnhan jwilder
  */
+
 public class Hill_Climbing {
 	LinkedList<Path> pathqueue;
 	LinkedList<Path> new_paths;

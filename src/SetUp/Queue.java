@@ -1,23 +1,20 @@
-/**
- * 
- */
-package SetUp;
 
+package SetUp;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedList;
 
 /**
- * @author jmetzger
- *
+ * Print_All.java
+ * @author jmetzger kvnhan jwilder
  */
+
 public class Queue {
 	
 	public LinkedList<LinkedList<Node>> queue = new LinkedList<LinkedList<Node>>();
 	public LinkedList<String> visited = new LinkedList<String>();
 
-	public Queue() {
-	}
+	public Queue() {}
 	
 	public LinkedList<LinkedList<Node>> getQueue(){
 		return queue;

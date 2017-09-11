@@ -1,8 +1,4 @@
-/**
- * 
- */
 package basic_searches;
-
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -11,18 +7,17 @@ import java.util.LinkedList;
 import SetUp.Path;
 
 /**
- * @author jmetzger
- *
+ * A_Star.java
+ * @author jmetzger kvnhan jwilder
  */
+
 public class A_Star {
 	
 	LinkedList<Path> pathqueue;
 	LinkedList<Path> new_paths;
 	HashMap<String, Double> heuristic_dict;
 	
-	public A_Star() {
-		
-	}
+	public A_Star() {}
 	
 	public void aSearch(LinkedList<Path> pathqueue, LinkedList<Path> new_paths, HashMap<String, Double> heuristic_dict) {
 		for (Path n : new_paths) {
