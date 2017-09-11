@@ -2,10 +2,11 @@ package SetUp;
 import java.io.BufferedReader;
 import java.io.FileReader;
 
+import general_search.general_search;
+
 /**
  * main.java
  * @author jmetzger kvnhan jwilder
- * @version 1.2
  */
 
 
@@ -19,6 +20,7 @@ public class Main {
 		Graph g = new Graph();
 		//LinkedList<Node> startQueue = new LinkedList<Node>();
 		Initial i = new Initial();
+		//general_search gs = new general_search();
 
 		System.out.println("\n===== Project 1 =====");
 		System.out.println("\nPlease Select the Search Algorithm below you wish to execute:");
