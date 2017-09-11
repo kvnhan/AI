@@ -139,7 +139,7 @@ public class Graph {
 		System.out.println("      Expanded   " + "        Queue");
 		while(true){
 			
-			if(found || pathqueue.getFirst().getP().getFirst().getName().equals("G")) {
+			if(found) {
 				System.out.println("\nGoal Reached!");
 				return null;
 			}
@@ -151,6 +151,11 @@ public class Graph {
 			
 			if(!method.equals("BS") && !method.equals("IDS")){
 				System.out.print(pathqueue.getFirst().getP().getFirst().getName());
+				if(pathqueue.getFirst().getP().getFirst().getName().equals("G")){
+					printQueue2(pathqueue);
+					System.out.println("\nGoal Reached!");
+					return null;
+				}
 				printQueue2(pathqueue);
 			}
 			
