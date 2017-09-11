@@ -90,11 +90,10 @@ public class Iterative_Deepening {
 			ids(graph, node, node, 1, startQueue);
 			return true;
 		}
-		 if(depth == 1 && node.getName().equals("S")){
-			 System.out.print("      " + node.getName());
-			printQueue2(queue);
+		
+	
 
-		 }
+		 
 		if(node.getName().equals("S") && depth > 1){
 			startQueue.add(node);
 			queue.add(startQueue);
@@ -125,6 +124,8 @@ public class Iterative_Deepening {
 				}
 				map.put(node.getName(), dqueue);
 			}else{
+				System.out.print("      " + node.getName());
+				printQueue2(queue);
 				queue = fixDFSQueue(node, dummyqueue);
 			}
 			
