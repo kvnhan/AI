@@ -32,7 +32,7 @@ public class Beam {
 		LinkedList<Node> path = new LinkedList<Node>();
 		
 		if(node.getName().equals("G")){
-			System.out.print("      " + node.getName());
+			System.out.print(node.getName());
 			printQueue2(graph, queue);
 			return true;
 		}
@@ -41,7 +41,7 @@ public class Beam {
 		path = removePath(path, from);
 		
 		if(path.size() == 0){
-			System.out.print("\t" + node.getName());
+			System.out.print(node.getName());
 			printQueue2(graph, queue);
 			graph.setVisited(node);
 			queue = pop();
@@ -80,7 +80,7 @@ public class Beam {
 		best = sortH(level + 1, graph);
 		best = bestNodes(level + 1);
 		best = sortPath(best, node);
-		System.out.print("\t"+ node.getName());
+		System.out.print(node.getName());
 		printQueue2(graph, queue);
 		
 		

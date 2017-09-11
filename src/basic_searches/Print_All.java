@@ -3,7 +3,10 @@
  */
 package basic_searches;
 
+import java.util.LinkedList;
+
 import SetUp.Graph;
+import SetUp.Path;
 
 /**
  * @author jmetzger
@@ -15,7 +18,7 @@ public class Print_All {
 		
 	}
 	
-	public void print(Graph g) {
+	public void print(Graph g, LinkedList<Path> newpath, int counter) {
 		System.out.print("\n=====================\n");
 		System.out.println("\n- Depth First Search\n");
 		g.General_Search("DFS");

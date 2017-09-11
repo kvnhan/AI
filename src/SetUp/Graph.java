@@ -145,7 +145,7 @@ public class Graph {
 			}
 			
 			if (pathqueue.isEmpty()){
-				System.out.print("Fail");
+				System.out.print("\nFail\n\n");
 				return null;
 			}
 			
@@ -153,6 +153,7 @@ public class Graph {
 				System.out.print(pathqueue.getFirst().getP().getFirst().getName());
 				if(pathqueue.getFirst().getP().getFirst().getName().equals("G")){
 					printQueue2(pathqueue);
+					pathqueue = new LinkedList<Path>();
 					System.out.println("\nGoal Reached!\n");
 					return null;
 				}
@@ -285,7 +286,7 @@ public class Graph {
 	
 	public void printQueue2(Queue<Path> list){
 
-		System.out.print("                      [");
+		System.out.print("\t\t[");
 		
 		for(Path nodes: list){
 			System.out.print(nodes.getDist());

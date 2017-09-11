@@ -47,7 +47,7 @@ public class Initial {
 				br = new BufferedReader(fr);
 
 			} catch (Exception e) {
-				System.out.println("Sorry");
+				System.out.println("Go to Filename.java and input your path to your text file.\n");
 			}
 
 			while ((sCurrentLine = br.readLine()) != null) {
@@ -90,54 +90,62 @@ public class Initial {
 	public void selection(Graph g) {
 		Scanner in = new Scanner(System.in);
 		switch (in.nextInt()) {
+		case 0:
+			System.out.println("\nPrinting ALL SEARCH METHODS");
+			System.out.println("\nSearch Method: Depth 1st Search");
+			g.General_Search("DFS");
+			System.out.println("\nSearch Method: Breadth 1st Search");
+			g.General_Search("BFS");
+			System.out.println("\nSearch Method: Depth-Limited Search");
+			g.General_Search("DLS");
+			System.out.println("\nSearch Method: Iterative Deepening Search");
+			g.General_Search("IDS");
+			System.out.println("\nSearch Method: Uniform Cost Search (Branch-and-bound)");
+			g.General_Search("UCS");
+			System.out.println("\nSearch Method: Greedy Search");
+			g.General_Search("Greedy");
+			System.out.println("\nSearch Method: A*");
+			g.General_Search("A*");
+			System.out.println("\nSearch Method: Hill-Climbing Search");
+			g.General_Search("HCS");
+			System.out.println("\nSearch Method: Beam Search");
+			g.General_Search("BS");
+			break;
 		case 1:
 			System.out.println("\nSearch Method: Depth 1st Search");
-			System.out.println("\n===== Queue =====\n");
 			g.General_Search("DFS");
 			break;
 		case 2:
 			System.out.println("\nSearch Method: Breadth 1st Search");
-			System.out.println("\n===== Queue =====\n");
 			g.General_Search("BFS");
 			break;
 		case 3:
 			System.out.println("\nSearch Method: Depth-Limited Search");
-			System.out.println("\n===== Queue =====\n");
 			g.General_Search("DLS");
 			break;
 		case 4:
 			System.out.println("\nSearch Method: Iterative Deepening Search");
-			System.out.println("\n===== Queue =====\n");
 			g.General_Search("IDS");
 			break;
 		case 5:
 			System.out.println("\nSearch Method: Uniform Cost Search (Branch-and-bound)");
-			System.out.println("\n===== Queue =====\n");
 			g.General_Search("UCS");
 			break;
 		case 6:
 			System.out.println("\nSearch Method: Greedy Search");
-			System.out.println("\n===== Queue =====\n");
 			g.General_Search("Greedy");
 			break;
 		case 7:
 			System.out.println("\nSearch Method: A*");
-			System.out.println("\n===== Queue =====\n");
 			g.General_Search("A*");
 			break;
 		case 8:
 			System.out.println("\nSearch Method: Hill-Climbing Search");
-			System.out.println("\n===== Queue =====\n");
 			g.General_Search("HCS");
 			break;
 		case 9:
 			System.out.println("\nSearch Method: Beam Search");
-			System.out.println("\n===== Queue =====\n");
 			g.General_Search("BS");
-			break;
-		case 10:
-			System.out.println("\nPrinting ALL SEARCH METHODS");
-			p.print(g);
 			break;
 		default:
 			System.err.println("Wrong Input");
