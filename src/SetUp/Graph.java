@@ -139,7 +139,8 @@ public class Graph {
 		System.out.println("      Expanded   " + "        Queue");
 		while(true){
 			
-			if(found) {
+			if(found || pathqueue.getFirst().getP().getFirst().getName().equals("G")) {
+				System.out.println("\nGoal Reached!");
 				return null;
 			}
 			

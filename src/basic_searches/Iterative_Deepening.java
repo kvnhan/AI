@@ -57,7 +57,6 @@ public class Iterative_Deepening {
 			if(node.getName().equals("G")){
 				System.out.print("      " + node.getName());
 				printQueue2(queue);
-				System.out.println("\nGoal Reached!");
 				return true;
 			}
 			System.out.print("      " + node.getName());
@@ -160,9 +159,6 @@ public class Iterative_Deepening {
 				return true;
 				
 			}
-			
-			System.out.println("\nGoal Reached!");
-	
 			return true;
 	}
 	

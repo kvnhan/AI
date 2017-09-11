@@ -34,7 +34,6 @@ public class Beam {
 		if(node.getName().equals("G")){
 			System.out.print("      " + node.getName());
 			printQueue2(graph, queue);
-			System.out.println("\nGoal Reached!");
 			return true;
 		}
 		
