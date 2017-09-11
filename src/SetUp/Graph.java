@@ -136,11 +136,11 @@ public class Graph {
 		Path path = new Path(nodepath, 0.0);
 		pathqueue.add(path);
 		found = false;
-		System.out.println("      Expanded   " + "        Queue");
+		System.out.println("Expanded\t\t" + "Queue");
 		while(true){
 			
 			if(found) {
-				System.out.println("\nGoal Reached!");
+				System.out.println("\nGoal Reached!\n");
 				return null;
 			}
 			
@@ -153,7 +153,7 @@ public class Graph {
 				System.out.print(pathqueue.getFirst().getP().getFirst().getName());
 				if(pathqueue.getFirst().getP().getFirst().getName().equals("G")){
 					printQueue2(pathqueue);
-					System.out.println("\nGoal Reached!");
+					System.out.println("\nGoal Reached!\n");
 					return null;
 				}
 				printQueue2(pathqueue);

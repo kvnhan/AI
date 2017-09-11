@@ -9,6 +9,8 @@ import java.io.FileReader;
 import java.util.LinkedList;
 import java.util.Scanner;
 
+import basic_searches.Print_All;
+
 /**
  * @author jmetzger
  *
@@ -18,7 +20,7 @@ import java.util.Scanner;
 public class Initial {
 	
 	//private static final String FILENAME = "/Users/jmetzger/Desktop/graph.txt";
-	private static final String FILENAME = "C:/Users/Kien Nhan/Downloads/graph.txt";
+	//private static final String FILENAME = "C:/Users/Kien Nhan/Downloads/graph.txt";
 	//private static final String FILENAME = "/Users/joe/Desktop/graph.txt";
 
 	private LinkedList<String> visited = new LinkedList<String>();
@@ -26,6 +28,8 @@ public class Initial {
 	private LinkedList<Node> visitedNode = new LinkedList<Node>();
 	private Queue queueClass = new Queue();
 	private LinkedList<String> DeadEnd = new LinkedList<String>();
+	private Filename f = new Filename();
+	private Print_All p = new Print_All();
 
 	public Initial() {
 
@@ -39,7 +43,7 @@ public class Initial {
 			//String path = file.getAbsolutePath();
 			Node node1, node2;
 			try {
-				fr = new FileReader(FILENAME);
+				fr = new FileReader(f.getName());
 				br = new BufferedReader(fr);
 
 			} catch (Exception e) {
@@ -133,15 +137,7 @@ public class Initial {
 			break;
 		case 10:
 			System.out.println("\nPrinting ALL SEARCH METHODS");
-			g.General_Search("DFS");
-			g.General_Search("BFS");
-			g.General_Search("DLS");
-			g.General_Search("IDS");
-			g.General_Search("UCS");
-			g.General_Search("Greedy");
-			g.General_Search("A*");
-			g.General_Search("HCS");
-			g.General_Search("BS");
+			p.print(g);
 			break;
 		default:
 			System.err.println("Wrong Input");
