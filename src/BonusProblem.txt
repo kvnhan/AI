@@ -1,0 +1,25 @@
+S A 4
+A B 1
+S T 5
+A D 6
+D C 7
+D F 4
+C G 5
+T E 2
+E P 4
+P G 8
+E R 6
+R G 4
+F G 3
+#####
+S 12
+A 4
+B 2
+T 7
+D 1
+E 5
+P 5
+R 9
+C 8
+G 0
+F 6

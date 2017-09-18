@@ -19,6 +19,7 @@ public class Filename {
 		 * Put path to file here
 		 */
 		//FILENAME = "src/graph.txt";
+		FILENAME = "src/BonusProblem.txt";
 		//FILENAME = "src/second_graph.txt";
 		//FILENAME = "C:/Users/Jon/Desktop/graph.txt";
 		//FILENAME = "C:/Users/Kien/Downloads/graph.txt";
